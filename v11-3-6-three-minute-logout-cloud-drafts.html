@@ -1,0 +1,527 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1730"><title>QuoteFlow SA — V11.3.2 Read-only and Trash Preview</title><style>
+:root{font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:#17243b;background:#f4f7fc}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.hide{display:none!important}.shell{min-height:100vh;display:grid;grid-template-columns:236px minmax(0,1fr)}.sidebar{background:#101d38;color:#d8e4f4;padding:24px 13px;min-height:100vh}.brand{font-size:24px;font-weight:850;color:white;letter-spacing:-1px;padding:8px 12px 18px}.brand em{font-style:normal;color:#54c7f2}.sub{color:#9bb1d0;font-size:12px;padding:0 12px 24px}.nav button{display:block;width:100%;text-align:left;border:0;border-radius:11px;padding:13px;background:none;color:#d8e4f4;font-weight:650;margin-bottom:5px}.nav button.active,.nav button:hover{background:#25476e;color:white}.sidefoot{font-size:12px;line-height:1.7;color:#93a9c9;margin:32px 12px}.workspace{min-width:0}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;background:white;border-bottom:1px solid #e5eaf3;padding:16px 28px}.top strong{font-size:18px}.topright{display:flex;gap:10px;align-items:center}.content{max-width:1240px;margin:auto;padding:26px}.hero{background:linear-gradient(120deg,#15284e,#226eaa);color:white;border-radius:20px;padding:28px;margin-bottom:22px}.hero h1{font-size:27px;margin:0 0 8px}.hero p{margin:0;color:#d6e9fb;line-height:1.5}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:20px 0}.card,.panel{background:white;border:1px solid #e1e8f3;border-radius:16px;box-shadow:0 4px 16px #172d5010}.card{padding:20px}.card small{color:#64748b}.card b{display:block;font-size:25px;margin-top:10px;overflow-wrap:anywhere}.panel{padding:23px;margin-bottom:20px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;background:#176ac1;color:white;border-radius:10px;padding:11px 16px;font-weight:700}.btn:hover{background:#10549c}.btn.secondary{background:#eaf2fd;color:#17477d}.btn.danger{background:#ffebeb;color:#9b2828}.btn.ghost{background:transparent;color:#42617f}.btn.small{padding:7px 11px;font-size:12px}.muted{color:#697b94}.notice{background:#fff7df;border:1px solid #eed49b;border-radius:12px;padding:15px 17px;margin-bottom:20px;color:#745522;line-height:1.5}.success{background:#e8f7ef;color:#136744;border:1px solid #a9dbc2}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px}.field.wide{grid-column:1/-1}label{font-weight:650;font-size:13px;color:#354860}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cdd8e8;border-radius:9px;background:white;color:#1b2d46}textarea{min-height:78px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid #95c4f7;border-color:#2273bd}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:620px}th,td{padding:13px 10px;border-bottom:1px solid #edf0f6;text-align:left;font-size:13px}th{color:#6b7b91;background:#f8fafd;font-weight:750}td:last-child{text-align:right}.empty{padding:36px 10px;text-align:center;color:#70839c}.status{display:inline-block;background:#eaf2fd;color:#285b9a;border-radius:30px;padding:5px 9px;font-size:11px;font-weight:800}.status.paid{background:#dcfce7;color:#176534}.items{display:grid;gap:8px}.item{display:grid;grid-template-columns:minmax(160px,3fr) minmax(80px,1fr) minmax(100px,1.2fr) auto;gap:8px;align-items:end}.item label{font-size:11px}.totals{max-width:350px;margin:18px 0 0 auto}.totals>div{display:flex;justify-content:space-between;padding:7px 0}.totals .grand{font-size:20px;font-weight:850;border-top:2px solid #d8e4f2;padding-top:13px}.authpage{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 15% 20%,#274e7d,#0b1730 65%);padding:20px}.authcard{width:min(460px,100%);background:white;border-radius:22px;padding:30px;box-shadow:0 20px 65px #050b2055}.authcard h1{margin:0 0 5px}.authcard p{color:#64748b;line-height:1.5}.authcard .field{margin:15px 0}.authcard .btn{width:100%}.authswitch{display:flex;justify-content:center;gap:12px;margin-top:18px}.authswitch button{border:0;background:none;color:#176ac1;font-weight:700}.message{padding:12px;border-radius:9px;background:#eaf2fd;color:#204c7a;margin:12px 0;font-size:13px;line-height:1.5}.error{background:#ffeded;color:#a22323}.loading{position:fixed;inset:0;background:#0d1b3499;display:grid;place-items:center;color:white;font-weight:800;z-index:50}.printonly{display:none}.pill{font-size:11px;background:#eaf7ef;color:#196b43;border-radius:20px;padding:6px 10px;font-weight:750}.mini{font-size:12px}.mobilemenu{display:none}.docpaper{background:white;padding:35px;max-width:850px;margin:0 auto}.docpaper h1{color:#1d4b7b}.docpaper table{min-width:0}.docpaper .totals{margin-left:auto}@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{min-height:0;padding:12px;position:static}.brand{display:inline-block;padding:5px 8px;font-size:20px}.sub,.sidefoot{display:none}.nav{display:flex;overflow-x:auto;gap:5px}.nav button{white-space:nowrap;width:auto;margin:0;padding:10px 12px;font-size:12px}.content{padding:16px}.top{padding:13px 16px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.hero{padding:22px}.hero h1{font-size:23px}}@media(max-width:550px){.fields{grid-template-columns:1fr}.card{padding:15px}.card b{font-size:20px}.item{grid-template-columns:1fr 1fr}.item .desc{grid-column:1/-1}.item button{align-self:end}.topright .pill{display:none}.panel{padding:16px}.authcard{padding:22px}}@media print{body{background:white}.authpage,.shell,.loading{display:none!important}.printonly{display:block!important}.docpaper{padding:0;max-width:none}.docpaper table{width:100%}.docpaper td,.docpaper th{font-size:12px} @page{margin:15mm}}
+#qfIdleOverlay.hide{display:none!important}</style>
+<style>
+@media print {
+  @page {size:A4; margin:13mm}
+  .qf-paper {font-family:Arial,Helvetica,sans-serif;color:#16233b;font-size:11px;line-height:1.55}
+  .qf-top {display:flex;justify-content:space-between;gap:28px;border-bottom:4px solid #1473a9;padding-bottom:20px;margin-bottom:22px}
+  .qf-company {font-size:21px;font-weight:800;color:#11294d}
+  .qf-title {font-size:26px;font-weight:800;letter-spacing:1px;color:#1473a9;text-align:right}
+  .qf-kicker {font-size:10px;letter-spacing:2px;color:#50708c;text-transform:uppercase}
+  .qf-meta {display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:18px 0 24px}
+  .qf-box {border:1px solid #dce5ef;border-radius:7px;padding:13px;overflow-wrap:anywhere}
+  .qf-box h3 {margin:0 0 7px;font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#50708c}
+  .qf-table {width:100%;border-collapse:collapse;margin-top:14px}
+  .qf-table th {background:#11294d!important;color:white!important;text-align:left;padding:10px 9px;font-size:10px}
+  .qf-table td {padding:11px 9px;border-bottom:1px solid #e3eaf1}
+  .qf-table td:nth-child(n+2),.qf-table th:nth-child(n+2) {text-align:right}
+  .qf-summary {width:260px;margin:22px 0 18px auto}
+  .qf-summary>div {display:flex;justify-content:space-between;padding:6px 0}
+  .qf-summary .qf-total {border-top:2px solid #1473a9;font-size:17px;font-weight:800;color:#11294d;padding-top:12px}
+  .qf-note {background:#f1f6fb;padding:12px 14px;border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .qf-footer {margin-top:30px;border-top:1px solid #dce5ef;padding-top:12px;text-align:center;color:#59718c;font-size:9px}
+  .qf-amount {font-size:27px;font-weight:800;color:#1473a9;margin:15px 0}
+}
+</style>
+
+<style>
+@media print {
+ .qf-paper {--qf-ink:#11294d;--qf-accent:#1473a9;--qf-soft:#f1f6fb}
+ .qf-paper .qf-company,.qf-paper .qf-summary .qf-total {color:var(--qf-ink)!important}
+ .qf-paper .qf-title,.qf-paper .qf-amount {color:var(--qf-accent)!important}
+ .qf-paper .qf-top {border-bottom-color:var(--qf-accent)!important}
+ .qf-paper .qf-table th {background:var(--qf-ink)!important}
+ .qf-paper .qf-summary .qf-total {border-top-color:var(--qf-accent)!important}
+ .qf-paper .qf-note {background:var(--qf-soft)!important}
+ .qf-paper[data-template="construction"] .qf-top {border-bottom-width:7px!important}
+ .qf-paper[data-template="construction"] .qf-table th {text-transform:uppercase;letter-spacing:1px}
+ .qf-paper[data-template="modern"] .qf-top {border-bottom-width:2px!important;border-radius:12px}
+ .qf-paper[data-template="modern"] .qf-box {border-radius:15px!important}
+ .qf-paper[data-template="elegant"] .qf-company,.qf-paper[data-template="elegant"] .qf-title {font-family:Georgia,serif!important;letter-spacing:.4px}
+ .qf-paper[data-template="elegant"] .qf-table th {font-weight:normal;letter-spacing:1px}
+ .qf-paper[data-template="bold"] .qf-title {font-size:33px!important;font-weight:900!important}
+ .qf-paper[data-template="bold"] .qf-top {border-bottom-width:9px!important}
+ .qf-paper[data-template="minimal"] .qf-box {border:none!important;border-bottom:1px solid #bbb!important;border-radius:0!important}
+ .qf-paper[data-template="minimal"] .qf-top {border-bottom-width:1px!important}
+}
+</style>
+<style>
+.qf-logo-settings{display:grid;grid-template-columns:minmax(150px,240px) 1fr;gap:18px;align-items:center;margin-top:8px}
+.qf-logo-stage{height:140px;border:1px dashed #a5b5c9;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
+.qf-logo-stage img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+.qf-logo-settings input[type=file]{max-width:100%;font-size:13px}
+@media(max-width:600px){.qf-logo-settings{grid-template-columns:1fr}}
+@media print{
+ .qf-logo-company{display:flex;align-items:center;gap:17px;max-width:390px}
+ .qf-logo-paper{display:block;width:112px;height:83px;object-fit:contain;object-position:center;flex:none;background:#fff;border-radius:3px}
+ .qf-logo-company .qf-company-text{min-width:0;overflow-wrap:anywhere}
+ .qf-top{align-items:flex-start}
+}
+</style><style>
+@media print {
+ .qf-paper .qf-logo-paper {max-width:112px!important;max-height:82px!important;width:auto!important;height:auto!important;object-fit:contain!important;object-position:center!important;flex-shrink:0!important;background:transparent!important}
+ .qf-paper .qf-logo-company {display:flex;align-items:center;gap:14px;min-width:0}
+ .qf-paper .qf-company-text {overflow-wrap:anywhere;min-width:0}
+ .qf-paper[data-header="stacked"] .qf-top {display:block!important}
+ .qf-paper[data-header="stacked"] .qf-top>div:last-child {display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-top:20px;border-top:1px solid #dce5ef;padding-top:12px}
+ .qf-paper[data-header="stacked"] .qf-top>div:last-child>div:last-child {text-align:right}
+ .qf-paper[data-header="centered"] .qf-top {display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
+ .qf-paper[data-header="centered"] .qf-logo-company {flex-direction:column!important;gap:8px!important}
+ .qf-paper[data-header="centered"] .qf-top>div:last-child {text-align:center!important}
+ .qf-paper[data-header="centered"] .qf-top>div:last-child>div:last-child {text-align:center!important}
+ .qf-paper .qf-personal-footer {margin:25px 0 5px;padding:11px 16px;border-top:2px solid var(--qf-accent);text-align:center;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;font-weight:600}
+ .qf-paper .qf-table tr,.qf-paper .qf-box,.qf-paper .qf-summary {break-inside:avoid}
+}
+</style><style>
+.qf-filterbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:13px;align-items:center}.qf-filterbar input,.qf-filterbar select{flex:1 1 165px;min-width:0;border:1px solid #ccd7e5;border-radius:9px;padding:11px;background:white;color:#17243b}.qf-result{font-size:12px;color:#59718c;margin:8px 0 12px}.qf-pager{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}.qf-pager button{border:1px solid #ccd7e5;background:#fff;border-radius:8px;padding:9px 14px;color:#17345c;font-weight:650}.qf-pager button:disabled{opacity:.45}
+@media print {.qf-filterbar,.qf-result,.qf-pager{display:none!important}}
+</style><style>#subscription .cards{grid-template-columns:repeat(2,minmax(0,1fr))}#subscription .card h2{margin:9px 0 0;font-size:28px}#subscription .card span{font-size:12px;color:#61718a}@media(max-width:520px){#subscription .cards{grid-template-columns:1fr}}</style></head><body>
+<div id="loading" class="loading hide">Working securely…</div>
+<div id="auth" class="authpage"><div class="authcard"><div class="brand" style="color:#17345c;padding:0 0 20px">Quote<em>Flow</em> SA</div><h1 id="authTitle">Welcome back</h1><p>Sign in to your secure business workspace.</p><div id="authMessage" class="message hide"></div><form id="authForm"><div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" required></div><div id="passwordWrap" class="field"><label for="password">Password</label><input id="password" type="password" minlength="8" autocomplete="current-password" required></div><button id="authSubmit" class="btn" type="submit">Sign in</button></form><div class="authswitch"><button type="button" id="signinLink">Sign in</button><button type="button" id="signupLink">Create account</button><button type="button" id="resetLink">Reset password</button></div><p class="mini">Development preview. Use test information only until security and backup testing is complete.</p></div></div>
+<div id="app" class="shell hide"><aside class="sidebar"><div class="brand">Quote<em>Flow</em> SA</div><div class="sub">CLOUD WORKSPACE · V11.3.6 PREVIEW</div><nav class="nav" id="nav"><button data-view="dashboard" class="active">◫ Dashboard</button><button data-view="quotations">▤ Quotations</button><button data-view="invoices">▣ Invoices</button><button data-view="customers">♧ Customers</button><button data-view="payments">◉ Payments</button><button data-view="business">⚙ Business</button><button data-view="subscription">♢ Subscription</button><button data-view="letterheads">✉ Letterheads</button><button data-view="trash">🗑 Trash</button><button data-view="drafts">📝 Drafts</button></nav><div class="sidefoot">Support: <a href="mailto:info@quoteflowsa.co.za" style="color:#bfe6ff">info@quoteflowsa.co.za</a><br>Billing: <a href="mailto:accounts@quoteflowsa.co.za" style="color:#bfe6ff">accounts@quoteflowsa.co.za</a><br><br>Encrypted connection · Supabase authentication<br>Private test environment</div></aside><main class="workspace"><header class="top"><strong id="pageTitle">Dashboard</strong><div class="topright"><span class="pill">CLOUD PREVIEW</span><button class="btn small secondary" id="signout">Sign out</button></div></header><div class="content"><div class="notice">⚠ <strong>Private development preview. Search and pagination are client-side only; database-enforced monthly document quotas are enabled, but live payment processing, email delivery, backups and production security are not yet verified.</strong> Test with fictional records only. No verified backups, billing, audit controls, VAT compliance or production security review yet.</div>
+<section id="dashboard"><div class="hero"><h1 id="welcome">Your business, beautifully organised.</h1><p>Create quotations, turn them into invoices and track payments from one workspace.</p><div class="actions" style="margin-top:19px"><button class="btn" onclick="newDoc('quotation')">+ New quotation</button><button class="btn secondary" onclick="newDoc('invoice')">+ New invoice</button><button class="btn secondary" onclick="show('trash')">🗑 Trash</button></div></div><div class="cards" id="stats"></div><div class="panel"><div class="row"><h3>Recent documents</h3><button class="btn small secondary" onclick="show('quotations')">View quotations</button></div><div id="recent"></div></div></section>
+<section id="quotations" class="hide"><div class="row"><h2>Quotations</h2><button class="btn" onclick="newDoc('quotation')">+ New quotation</button></div><div class="panel" style="margin-top:18px"><div class="qf-filterbar"><input id="qfSearch_quotations" type="search" placeholder="Search quotations..." aria-label="Search quotations" oninput="qfChange('quotations')"><select id="qfSort_quotations" onchange="qfChange('quotations')" aria-label="Sort quotations"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div><div id="qfCount_quotations" class="qf-result" aria-live="polite"></div><div id="quoteList"></div><div id="qfPager_quotations" class="qf-pager"></div></div></section>
+<section id="invoices" class="hide"><div class="row"><h2>Invoices</h2><button class="btn" onclick="newDoc('invoice')">+ New invoice</button></div><div class="panel" style="margin-top:18px"><div class="qf-filterbar"><input id="qfSearch_invoices" type="search" placeholder="Search invoices..." aria-label="Search invoices" oninput="qfChange('invoices')"><select id="qfStatus_invoices" onchange="qfChange('invoices')" aria-label="Filter invoice status"><option value="all">All payment statuses</option><option value="unpaid">Unpaid</option><option value="partial">Partially paid</option><option value="paid">Paid</option></select><select id="qfSort_invoices" onchange="qfChange('invoices')" aria-label="Sort invoices"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div><div id="qfCount_invoices" class="qf-result" aria-live="polite"></div><div id="invoiceList"></div><div id="qfPager_invoices" class="qf-pager"></div></div></section>
+<section id="customers" class="hide"><div class="row"><h2>Customers</h2><button class="btn" onclick="customerForm()">+ Add customer</button></div><div class="panel" style="margin-top:18px"><div class="qf-filterbar"><input id="qfSearch_customers" type="search" placeholder="Search customers..." aria-label="Search customers" oninput="qfChange('customers')"></div><div id="qfCount_customers" class="qf-result" aria-live="polite"></div><div id="customerList"></div><div id="qfPager_customers" class="qf-pager"></div></div></section>
+<section id="payments" class="hide"><div class="row"><h2>Payments</h2></div><div class="panel" style="margin-top:18px"><div class="qf-filterbar"><input id="qfSearch_payments" type="search" placeholder="Search payments..." aria-label="Search payments" oninput="qfChange('payments')"><select id="qfSort_payments" onchange="qfChange('payments')" aria-label="Sort payments"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div><div id="qfCount_payments" class="qf-result" aria-live="polite"></div><div id="paymentList"></div><div id="qfPager_payments" class="qf-pager"></div></div></section>
+<section id="business" class="hide"><div class="row"><h2>Business settings</h2></div><div class="panel" style="margin-top:18px"><form id="businessForm"><div class="fields"><div class="field"><label>Business name</label><input name="name" required maxlength="160"></div><div class="field"><label>Registration number</label><input name="registration_number"></div><div class="field"><label>Email</label><input name="email" type="email"></div><div class="field"><label>Phone</label><input name="phone"></div><div class="field wide"><label>Address</label><textarea name="address"></textarea></div><div class="field"><label>VAT registration number (if applicable)</label><input name="vat_number"></div><div class="field wide"><label>Banking and payment details</label><textarea name="bank_details"></textarea></div><div class="field wide"><label>Business logo (PNG, JPG or WebP)</label><div class="qf-logo-settings"><div class="qf-logo-stage" id="qfLogoPreview"><span class="muted">No logo selected</span></div><div><input id="qfLogoFile" type="file" accept="image/png,image/jpeg,image/webp" aria-label="Choose business logo"><p class="mini muted">Your logo will be resized to fit documents without stretching. Transparent PNGs blend naturally with white paper. Maximum original file: 5 MB.</p><button type="button" class="btn small secondary" id="qfRemoveLogo">Remove logo</button><p id="qfLogoMessage" class="mini" aria-live="polite"></p></div></div></div><div class="field"><label>Document design</label><select name="document_template"><option value="corporate">Corporate — Navy</option><option value="construction">Construction — Orange</option><option value="modern">Modern — Teal</option><option value="elegant">Elegant — Plum</option><option value="bold">Bold — Red</option><option value="minimal">Minimal — Charcoal</option></select></div><div class="field"><label>Brand colour</label><input type="color" name="brand_color" value="#1473a9"></div><div class="field"><label>Document header arrangement</label><select name="document_header_layout"><option value="side_by_side">Side by side — Classic</option><option value="stacked">Stacked — Logo and details above title</option><option value="centered">Centred — Balanced header</option></select></div><div class="field wide"><label>Personalised document footer (optional)</label><input name="document_footer_message" maxlength="180" placeholder="e.g. Thank you for supporting our business"><p class="mini muted">Shown above the small QuoteFlow SA footer on quotations, invoices and receipts.</p></div></div><p class="muted">Your saved design is used consistently across your quotations, invoices and receipts. Choose a colour that suits your business.</p><div class="actions" style="margin-top:20px"><button class="btn" type="submit">Save business settings</button></div></form></div></section>
+<section id="drafts" class="hide"><h2>Saved Drafts</h2><p class="muted">Unfinished quotations, invoices and letterheads are automatically saved securely to your account while editing. Drafts do not use document credits until you finalise them. After your subscription expires, saved drafts remain visible, but editing requires renewal.</p><div id="qfDraftList">Loading drafts…</div></section><section id="trash" class="hide"><div class="row"><h2>Document Trash</h2><button class="btn secondary" onclick="qfEmptyTrash()">Empty Trash</button><button class="btn secondary" onclick="show('quotations')">Back</button></div><div class="panel" style="margin-top:18px"><p class="muted">Move unwanted documents to Trash or restore them. Empty Trash permanently removes them from your visible account, while restricted audit records are retained to prevent quota abuse. Emptying Trash cannot be undone. Changes require an active subscription. Paid invoices with recorded payments are protected.</p><div id="qfTrashList"></div><div class="panel" style="margin-top:18px;border:1px dashed #94a3b8"><h3>Try Trash safely — Demo only</h3><p class="muted">Use fictional demo documents below. Nothing here is written to Supabase or your real business account.</p><div id="qfTrashDemo"></div></div></div></section><section id="subscription" class="hide">
+<div class="row"><h2>Subscription & billing</h2><button class="btn secondary" type="button" onclick="qfRefreshPlan()">Refresh status</button></div>
+<div class="panel" style="margin-top:18px">
+<h3>Your current subscription</h3><p class="muted">Questions? <a href="mailto:info@quoteflowsa.co.za">info@quoteflowsa.co.za</a> · Payments: <a href="mailto:accounts@quoteflowsa.co.za">accounts@quoteflowsa.co.za</a></p><p class="muted">Status and document limits are calculated by the secure server, not by your phone.</p><p id="qfPlanName">Loading subscription...</p>
+<p id="qfPlanDetails" class="muted"></p>
+<div class="cards"><div class="card"><span>Documents used</span><h2 id="qfUsed">—</h2></div><div class="card"><span>Document allowance</span><h2 id="qfAllowance">—</h2></div></div>
+<p id="qfRemaining"></p><p id="qfBillingStatus" class="muted"></p><p id="qfReadOnlyBanner" class="notice hide">Read-only: editing, creating and deleting are disabled. Existing records and PDFs remain accessible.</p>
+<p class="notice">Your customers, invoices, quotations, payments and letters remain saved when your plan expires. Payment processing is not live yet. Plan requests do not activate a paid subscription.</p>
+</div>
+<div class="panel" style="margin-top:18px"><h3>Choose your package</h3>
+<p class="muted">Compare packages and submit a request. You will not be charged. Only verified payment processing can activate a paid plan in a future release.</p>
+<div class="cards">
+<div class="card"><h3>Starter</h3><h2>R79 <small>/ month</small></h2><p>30 documents per month</p><button class="btn secondary" type="button" onclick="qfViewPackage('starter')">View Starter details</button> <button class="btn secondary" type="button" onclick="qfRequestPlan('starter')">Request Starter</button></div>
+<div class="card"><h3>Business</h3><h2>R149 <small>/ month</small></h2><p>150 documents per month</p><button class="btn secondary" type="button" onclick="qfViewPackage('business')">View Business details</button> <button class="btn secondary" type="button" onclick="qfRequestPlan('business')">Request Business</button></div>
+<div class="card"><h3>Professional</h3><h2>R249 <small>/ month</small></h2><p>500 documents per month</p><button class="btn secondary" type="button" onclick="qfViewPackage('professional')">View Professional details</button> <button class="btn secondary" type="button" onclick="qfRequestPlan('professional')">Request Professional</button></div>
+</div>
+<div class="panel hide" id="qfPackageDetails" style="margin-top:18px;background:#f2f7fc;border:1px solid #cbd9ea" aria-live="polite">
+<h3 id="qfPackageTitle">Package details</h3>
+<p id="qfPackageDescription"></p>
+<div class="cards"><div class="card"><span>Monthly allowance</span><h2 id="qfPackageLimit">—</h2></div><div class="card"><span>Your remaining documents</span><h2 id="qfPackageRemaining">—</h2></div></div>
+<p id="qfPackageNote" class="muted"></p><button type="button" class="btn secondary" onclick="$('qfPackageDetails').classList.add('hide')">Close details</button>
+</div>
+<p id="qfRequestMessage" class="muted" role="status"></p>
+</div>
+<div class="panel" style="margin-top:18px"><h3>Manage your subscription</h3><p class="muted">Cancellation requests are recorded for review. They do not delete your business data.</p>
+<button class="btn secondary" onclick="qfRequestPlan('cancel')">Request cancellation</button>
+<h3 style="margin-top:20px">Subscription activity</h3>
+<p class="muted">Verified payment and renewal events will appear here when the secure payment integration is connected. No payment is currently being collected.</p>
+<div id="qfSubscriptionActivity" class="muted">No verified billing events yet.</div>
+<h3 style="margin-top:20px">Your requests</h3><div id="qfRequestHistory" class="muted">No requests yet.</div>
+</div></section>
+<section id="letterheads" class="hide"><div class="row"><h2>Letterheads</h2><button class="btn" onclick="newLetterhead()">+ New letterhead</button><button class="btn secondary" onclick="show('trash')">Trash</button></div><div class="panel" style="margin-top:18px"><p class="muted">Create branded letters with your message, sender, designation and signature area. Saved privately in your business workspace.</p><div id="letterheadList"></div></div></section>
+<section id="letterheadEdit" class="hide"><div class="row"><h2 id="letterheadTitle">Business letterhead</h2><button class="btn secondary" onclick="show('letterheads')">Back</button></div><div class="panel" style="margin-top:18px"><form id="letterheadForm"><div class="fields"><div class="field"><label>Letter date</label><input type="date" name="letter_date" required></div><div class="field"><label>Reference</label><input name="reference" maxlength="100" placeholder="Reference number (optional)"></div><div class="field wide"><label>Recipient / To</label><input name="recipient" maxlength="250" placeholder="Name or organisation"></div><div class="field wide"><label>Subject</label><input name="subject" maxlength="250" required placeholder="Subject of your letter"></div><div class="field wide"><label>Message</label><textarea name="message" rows="10" required placeholder="Type your professional letter here..."></textarea></div><div class="field"><label>Name of person signing</label><input name="sender_name" maxlength="160" required></div><div class="field"><label>Designation / Job title</label><input name="designation" maxlength="160" required placeholder="e.g. Managing Director"></div></div><div class="actions" style="margin-top:18px"><button class="btn" type="submit">Save letterhead</button><button class="btn secondary" type="button" onclick="printLetterhead(editingLetterhead)">Print / Save PDF</button></div></form></div></section>
+<section id="customerEdit" class="hide"><div class="row"><h2 id="customerTitle">Customer</h2><button class="btn secondary" onclick="show('customers')">Back</button></div><div class="panel" style="margin-top:18px"><form id="customerForm"><div class="fields"><div class="field"><label>Name</label><input name="name" maxlength="160" required></div><div class="field"><label>Email</label><input name="email" type="email"></div><div class="field"><label>Phone</label><input name="phone"></div><div class="field wide"><label>Address</label><textarea name="address"></textarea></div></div><button class="btn" style="margin-top:18px" type="submit">Save customer</button></form></div></section>
+<section id="docEdit" class="hide"><div class="row"><h2 id="docTitle">Document</h2><button class="btn secondary" onclick="show(editKind==='quotation'?'quotations':'invoices')">Back</button></div><div class="panel" style="margin-top:18px"><form id="docForm"><div class="fields"><div class="field"><label>Document number</label><input name="document_number" maxlength="80" required></div><div class="field"><label>Customer</label><select name="customer_id" required></select></div><div class="field"><label>Issue date</label><input name="issue_date" type="date" required></div><div class="field"><label>Valid until / Due date</label><input name="due_date" type="date"></div><div class="field"><label>Discount (R)</label><input name="discount_amount" type="number" min="0" step="0.01" value="0"></div><div class="field"><label>VAT rate (%) — only if applicable</label><input name="vat_percent" type="number" min="0" max="100" step="0.01" value="0"></div><div class="field wide"><label>Notes</label><textarea name="notes"></textarea></div></div><h3 style="margin-top:26px">Line items</h3><div id="items" class="items"></div><button type="button" class="btn secondary small" onclick="addItem()" style="margin-top:12px">+ Add line</button><div class="totals" id="totals"></div><div class="actions" style="margin-top:24px"><button class="btn" type="submit">Save to cloud</button></div></form></div></section>
+<section id="paymentEdit" class="hide"><div class="row"><h2>Record payment</h2><button class="btn secondary" onclick="show('invoices')">Back</button></div><div class="panel" style="margin-top:18px"><p id="paySummary"></p><form id="paymentForm"><div class="fields"><div class="field"><label>Amount received (R)</label><input name="amount" type="number" min="0.01" step="0.01" required></div><div class="field"><label>Payment date</label><input name="paid_on" type="date" required></div><div class="field"><label>Method</label><select name="method"><option>Bank transfer</option><option>Cash</option><option>Card</option><option>Other</option></select></div><div class="field"><label>Reference</label><input name="reference"></div></div><button class="btn" type="submit" style="margin-top:18px">Save payment</button></form></div></section>
+</div></main></div><div id="qfIdleOverlay" class="hide" role="dialog" aria-modal="true" aria-labelledby="qfIdleHeading" style="position:fixed;inset:0;background:rgba(9,20,42,.72);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px">
+<div style="background:white;color:#182944;border-radius:18px;padding:25px;width:min(420px,100%);box-shadow:0 15px 60px #0004">
+<h2 id="qfIdleHeading" style="margin-top:0">Are you still there?</h2>
+<p>For your security, QuoteFlow SA will sign you out in <strong><span id="qfIdleCountdown">15</span> seconds</strong> unless you continue.</p>
+<p style="font-size:13px;color:#52627a">Unsaved changes may be lost when you sign out.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn" onclick="qfStaySignedIn()">Continue session</button><button type="button" class="btn secondary" onclick="qfLogoutIdle()">Log out now</button></div>
+</div></div><div id="printArea" class="printonly"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script>
+'use strict';
+const PROJECT_URL='https://ecptvqwrjjfwexmyazmn.supabase.co';
+const PUBLIC_KEY='sb_publishable_M3Lc-znCP_4QmKniZ4Er-g_w_zgjRQx';
+const $=id=>document.getElementById(id), money=n=>'R '+Number(n||0).toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2}), esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])), date=()=>{const d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}, round=n=>Math.round((Number(n)||0)*100)/100;
+let sb, session=null, business=null, customers=[], docs=[], items=[], payments=[], view='dashboard', authMode='signin', editCustomer=null, editId=null, editKind='quotation', paymentDoc=null, entitlement=null, letterheads=[], editingLetterhead=null;
+const busy=x=>$('loading').classList.toggle('hide',!x);
+function message(s,isError=false){$('authMessage').textContent=s;$('authMessage').className='message'+(isError?' error':'')}
+function warn(e){alert((e&&e.message)||String(e))}
+function getForm(id){return $(id).elements}
+function show(v){if(qfDraftKey&&view!==v&&(view==='docEdit'||view==='letterheadEdit'))qfDraftFlush();view=v;document.querySelectorAll('.content>section').forEach(s=>s.classList.toggle('hide',s.id!==v));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));$('pageTitle').textContent=({dashboard:'Dashboard',quotations:'Quotations',invoices:'Invoices',customers:'Customers',payments:'Payments',business:'Business settings',subscription:'Subscription',trash:'Document Trash',drafts:'Saved Drafts',letterheads:'Letterheads',docEdit:'Document editor',customerEdit:'Customer editor',paymentEdit:'Record payment',letterheadEdit:'Letterhead editor'})[v]||v;render();window.scrollTo(0,0)}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>show(b.dataset.view));
+function authScreen(mode){authMode=mode;$('authTitle').textContent=mode==='signup'?'Create your account':mode==='reset'?'Reset your password':mode==='recovery'?'Choose a new password':'Welcome back';$('authSubmit').textContent=mode==='signup'?'Create account':mode==='reset'?'Send reset email':mode==='recovery'?'Update password':'Sign in';$('passwordWrap').classList.toggle('hide',mode==='reset');$('password').required=mode!=='reset';$('authMessage').classList.add('hide')}
+$('signinLink').onclick=()=>authScreen('signin');$('signupLink').onclick=()=>authScreen('signup');$('resetLink').onclick=()=>authScreen('reset');
+$('authForm').onsubmit=async e=>{e.preventDefault();if(!sb)return message('Authentication library unavailable. Check your internet connection.',true);busy(true);try{const email=$('email').value.trim(),password=$('password').value;let r;if(authMode==='recovery')r=await sb.auth.updateUser({password});else if(authMode==='signup')r=await sb.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}});else if(authMode==='reset')r=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});else r=await sb.auth.signInWithPassword({email,password});if(r.error)throw r.error;if(authMode==='reset')message('If this email is registered, a reset link has been sent.');else if(authMode==='recovery'){message('Password updated. You can sign in now.');authScreen('signin');message('Password updated. Sign in with your new password.')}else if(authMode==='signup'&&!r.data.session)message('Account created. Check your email and confirm your address, then sign in.');else if(r.data.session)await enter(r.data.session)}catch(err){message(err.message||'Could not complete the request.',true)}finally{busy(false)}};
+$('signout').onclick=async()=>{busy(true);try{await sb.auth.signOut();exit()}catch(e){warn(e)}finally{busy(false)}};
+
+// 180 seconds total inactivity: warning at 165 seconds, then 15-second countdown.
+const QF_IDLE_LIMIT=180000,QF_IDLE_WARNING=15000;
+let qfIdleLast=Date.now(),qfIdleInterval=null,qfIdleSigningOut=false;
+function qfIdleStart(){
+ qfIdleLast=Date.now();qfIdleSigningOut=false;
+ if(qfIdleInterval)clearInterval(qfIdleInterval);
+ qfIdleInterval=setInterval(qfIdleTick,250);
+ qfIdleTick();
+}
+function qfIdleStop(){
+ if(qfIdleInterval)clearInterval(qfIdleInterval);
+ qfIdleInterval=null;
+ $('qfIdleOverlay')?.classList.add('hide');
+}
+function qfIdleActivity(){
+ if(!session||qfIdleSigningOut)return;
+ // When the warning is displayed, only the Continue button resets inactivity.
+ if(!$('qfIdleOverlay').classList.contains('hide'))return;
+ qfIdleLast=Date.now();
+}
+function qfStaySignedIn(){
+ if(!session||qfIdleSigningOut)return;
+ qfIdleLast=Date.now();
+ $('qfIdleOverlay').classList.add('hide');
+}
+async function qfLogoutIdle(){
+ await qfDraftFlush();
+ if(qfIdleSigningOut)return;
+ qfIdleSigningOut=true;qfIdleStop();
+ try{await sb.auth.signOut()}catch(err){console.error('Logout error:',err)}
+ exit();
+ message('You were signed out after 3 minutes of inactivity. Please sign in again.');
+}
+function qfIdleTick(){
+ if(!session||qfIdleSigningOut)return;
+ const remaining=QF_IDLE_LIMIT-(Date.now()-qfIdleLast);
+ if(remaining<=0){qfLogoutIdle();return;}
+ const overlay=$('qfIdleOverlay');
+ if(remaining<=QF_IDLE_WARNING){
+  overlay.classList.remove('hide');
+  $('qfIdleCountdown').textContent=String(Math.ceil(remaining/1000));
+ }else overlay.classList.add('hide');
+}
+for(const eventName of ['pointerdown','keydown','touchstart','wheel','scroll']){
+ document.addEventListener(eventName,qfIdleActivity,{passive:true,capture:true});
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)qfIdleTick()});
+
+function exit(){qfIdleStop();session=null;business=null;customers=[];docs=[];items=[];payments=[];letterheads=[];entitlement=null;$('app').classList.add('hide');$('auth').classList.remove('hide');authScreen('signin')}
+async function enter(s){session=s;qfIdleStart();$('auth').classList.add('hide');$('app').classList.remove('hide');await load();await qfDraftLoad();show('dashboard')}
+async function query(table,select='*'){const r=await sb.from(table).select(select);if(r.error)throw r.error;return r.data||[]}
+async function load(){busy(true);try{let b=await query('businesses');business=b[0]||null;if(!business){customers=[];docs=[];items=[];payments=[];show('business');$('welcome').textContent='Welcome to QuoteFlow SA';alert('Welcome! Start by saving your business name under Business settings.');return}const [c,d,i,p]=await Promise.all([query('customers'),query('documents'),query('document_items'),query('payments')]);customers=c;docs=d;items=i;payments=p;letterheads=await query('letterheads');await qfRefreshPlan(false);await qfLoadRequests();await qfLoadSubscriptionActivity();render()}catch(e){warn(e)}finally{busy(false)}}
+async function qfRefreshPlan(showError=true){
+ if(!business){entitlement=null;return}
+ try{
+  const r=await sb.rpc('qf_subscription_status',{p_business_id:business.id});
+  if(r.error)throw r.error;
+  const e=Array.isArray(r.data)?r.data[0]:r.data;
+  if(!e)throw new Error('No subscription status returned');
+  entitlement=e;
+  const set=(id,v)=>{const el=$(id);if(el)el.textContent=v};
+  const when=v=>v?new Date(v).toLocaleString('en-ZA',{dateStyle:'medium',timeStyle:'short'}):'Not set';
+  const labels={trial_active:'Trial active',trial_expired:'Trial expired',active:'Paid plan active',grace_period:'Payment overdue — 3-day grace period',payment_overdue:'Payment overdue — document creation restricted',limit_reached:'Document limit reached',inactive:'Subscription inactive'};
+  const label=labels[e.access_state]||e.access_state;
+  set('qfPlanName',String(e.plan).toUpperCase()+' — '+label);
+  set('qfUsed',String(e.documents_used));set('qfAllowance',String(e.document_limit));
+  set('qfRemaining','Documents remaining: '+Math.max(0,e.document_limit-e.documents_used)+'. '+(e.document_creation_allowed?'You can create documents.':'New document creation is restricted.')+' Your saved business records remain available.');
+  set('qfBillingStatus',label);qfReadOnlyUI();
+  set('qfPlanDetails',e.plan==='trial'?'Trial ends: '+when(e.trial_expires_at)+' • 3 total trial documents':('Renewal due: '+when(e.renewal_due_at)+' • Grace ends: '+when(e.grace_ends_at)+' • '+e.days_until_restriction+' day(s) until restriction'));
+ }catch(e){{const el=$('qfRemaining');if(el)el.textContent='Could not load current usage. Refresh to try again.';if(showError)alert('Unable to load plan: '+e.message);else console.error('Subscription status unavailable:',e)}}
+}
+const qfPackages={starter:{name:'Starter',price:79,limit:30},business:{name:'Business',price:149,limit:150},professional:{name:'Professional',price:249,limit:500}};
+function qfViewPackage(key){
+ const p=qfPackages[key];if(!p)return;
+ const el=$('qfPackageDetails');el.classList.remove('hide');
+ $('qfPackageTitle').textContent=p.name+' — R'+p.price+'/month';
+ $('qfPackageDescription').textContent='Includes up to '+p.limit+' quotations, invoices and letterheads combined per calendar month. Saved records stay accessible after expiry.';
+ $('qfPackageLimit').textContent=String(p.limit);
+ const active=entitlement&&entitlement.plan===key;
+ $('qfPackageRemaining').textContent=active?String(Math.max(0,Number(entitlement.document_limit)-Number(entitlement.documents_used))):'Not active';
+ $('qfPackageNote').textContent=active?'This is your active package. Remaining documents are calculated by Supabase.':'This is a package preview, not your active plan. Your current remaining allowance is shown above under Your current subscription. Requesting a package does not activate it or charge you.';
+ el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+let qfSubscriptionEvents=[];
+async function qfLoadSubscriptionActivity(){
+ if(!business)return;
+ const r=await sb.rpc('qf_subscription_activity',{p_business_id:business.id});
+ if(r.error){console.warn('Subscription activity unavailable:',r.error.message);return;}
+ qfSubscriptionEvents=r.data||[];
+ qfRenderSubscriptionActivity();
+}
+function qfRenderSubscriptionActivity(){
+ const el=$('qfSubscriptionActivity');if(!el)return;
+ el.innerHTML=qfSubscriptionEvents.length
+  ?qfSubscriptionEvents.map(e=>`<p><strong>${esc(e.event_type.replaceAll('_',' '))}</strong> · ${esc(new Date(e.created_at).toLocaleDateString('en-ZA'))}<br>${esc(e.event_message||'')}</p>`).join('')
+  :'No verified billing events yet.';
+}
+let qfPlanRequests=[];
+async function qfLoadRequests(){
+ if(!business)return;
+ const r=await sb.from('subscription_requests').select('id,requested_plan,status,created_at').eq('business_id',business.id).order('created_at',{ascending:false}).limit(30);
+ if(r.error)throw r.error;
+ qfPlanRequests=r.data||[];qfRenderRequestHistory();
+}
+function qfRenderRequestHistory(){
+ const el=$('qfRequestHistory');if(!el)return;
+ el.innerHTML=qfPlanRequests.length?qfPlanRequests.map(r=>`<p><strong>${esc(r.requested_plan==='cancel'?'Cancellation':r.requested_plan)}</strong> · ${esc(r.status)} · ${esc(new Date(r.created_at).toLocaleDateString('en-ZA'))}</p>`).join(''):'No requests yet.';
+}
+async function qfRequestPlan(plan){
+ if(!business)return alert('Save your business details first.');
+ const pending=qfPlanRequests.find(r=>r.status==='pending'&&r.requested_plan===plan);
+ if(pending)return alert('You already have a pending request for this action.');
+ const label=plan==='cancel'?'request cancellation':`request the ${plan} package`;
+ if(!confirm(`Do you want to ${label}? This does not take payment or change your active subscription.`))return;
+ busy(true);
+ try{
+  const r=await sb.from('subscription_requests').insert({business_id:business.id,requested_plan:plan});
+  if(r.error)throw r.error;
+  await qfLoadRequests();
+  $('qfRequestMessage').textContent='Request saved successfully. Your current subscription has not changed.';
+ }catch(e){warn(e)}finally{busy(false)}
+}
+function docItems(d){return items.filter(x=>x.document_id===d.id).sort((a,b)=>a.position-b.position)}
+function totals(d){const subtotal=docItems(d).reduce((s,i)=>s+Number(i.quantity)*Number(i.unit_price),0),discount=Math.min(subtotal,Number(d.discount_amount||0)),net=subtotal-discount,vat=round(net*Number(d.vat_rate||0));return {subtotal,discount,vat,total:round(net+vat)}}
+function paid(d){return round(payments.filter(p=>p.invoice_id===d.id).reduce((s,p)=>s+Number(p.amount),0))}
+function balance(d){return round(Math.max(0,totals(d).total-paid(d)))}
+function customerName(d){return customers.find(c=>c.id===d.customer_id)?.name||'Customer'}
+
+function qfConvertGuard(id){if(!qfRequireEdit())return;return convert(id)}
+
+let qfDraftKey=null,qfDraftKind=null,qfDraftTimer=null,qfDrafts=[],qfDraftSaving=null,qfDraftLastHash='',qfDraftPause=false;
+function qfDraftLabel(){
+ const el=$('qfDraftStatus');
+ if(el)return el;
+ const p=document.createElement('p');p.id='qfDraftStatus';p.className='muted';p.setAttribute('aria-live','polite');
+ const form=$('docForm');form?.parentElement?.insertBefore(p,form);
+ return p;
+}
+function qfDraftStart(kind,key){
+ qfDraftKey=key;qfDraftKind=kind;qfDraftLastHash='';
+ const label=qfDraftLabel();
+ if(label)label.textContent='Auto-save is on. Changes are saved to your secure cloud drafts.';
+}
+function qfDraftSnapshot(){
+ if(!qfDraftKey||!qfDraftKind||!business||!qfCanEdit())return null;
+ const form=$(qfDraftKind==='letterhead'?'letterheadForm':'docForm');
+ if(!form)return null;
+ const fields={};
+ for(const el of form.querySelectorAll('input[name],select[name],textarea[name]')){
+  if(el.type==='file')continue;
+  fields[el.name]=el.value;
+ }
+ const payload={fields,edit_id:qfDraftKind==='letterhead'?editingLetterhead:editId};
+ if(qfDraftKind!=='letterhead')payload.lines=[...$('items').children].map(r=>({
+  description:r.querySelector('.descInput')?.value||'',
+  quantity:r.querySelector('.qtyInput')?.value||'1',
+  unit_price:r.querySelector('.priceInput')?.value||'0'
+ }));
+ return payload;
+}
+async function qfDraftFlush(){
+ if(qfDraftTimer){clearTimeout(qfDraftTimer);qfDraftTimer=null}
+ if(qfDraftSaving)await qfDraftSaving;
+ const payload=qfDraftSnapshot();
+ if(!payload)return;
+ const hash=JSON.stringify(payload);
+ if(hash===qfDraftLastHash)return;
+ const key=qfDraftKey,kind=qfDraftKind,businessId=business.id;
+ qfDraftSaving=(async()=>{
+  const r=await sb.from('document_drafts').upsert({business_id:businessId,draft_key:key,kind,payload,updated_at:new Date().toISOString()},{onConflict:'business_id,draft_key'});
+  if(r.error){const el=$('qfDraftStatus');if(el)el.textContent='Draft could not be saved: '+r.error.message;return}
+  qfDraftLastHash=hash;
+  const el=$('qfDraftStatus');if(el)el.textContent='Draft saved securely at '+new Date().toLocaleTimeString('en-ZA');
+ })();
+ try{await qfDraftSaving}finally{qfDraftSaving=null}
+}
+function qfDraftSchedule(){
+ if(!qfDraftKey||qfDraftPause||!qfCanEdit())return;
+ if(qfDraftTimer)clearTimeout(qfDraftTimer);
+ qfDraftTimer=setTimeout(qfDraftFlush,800);
+}
+document.addEventListener('input',e=>{
+ if(e.target.closest('#docForm,#letterheadForm'))qfDraftSchedule()
+},true);
+document.addEventListener('change',e=>{
+ if(e.target.closest('#docForm,#letterheadForm'))qfDraftSchedule()
+},true);
+async function qfDraftLoad(){
+ if(!business)return;
+ const r=await sb.from('document_drafts').select('*').eq('business_id',business.id).order('updated_at',{ascending:false});
+ if(r.error){console.warn('Drafts unavailable',r.error.message);return}
+ qfDrafts=r.data||[];
+ qfRenderDrafts();
+}
+function qfRenderDrafts(){
+ const el=$('qfDraftList');if(!el)return;
+ el.innerHTML=qfDrafts.length?qfDrafts.map(d=>`<div class="panel" style="margin:8px 0;padding:14px">
+ <strong>${esc(d.kind.toUpperCase())}</strong> · ${esc(d.payload?.fields?.document_number||d.payload?.fields?.subject||'Untitled draft')}<br>
+ <span class="muted">Saved ${esc(new Date(d.updated_at).toLocaleString('en-ZA'))}</span><br>
+ <button class="btn small" onclick="qfResumeDraft('${d.id}')">Continue editing</button>
+ <button class="btn small secondary" onclick="qfDeleteDraft('${d.id}')">Discard draft</button>
+ </div>`).join(''):'<div class="empty">No unfinished drafts yet.</div>';
+}
+async function qfResumeDraft(id){
+ if(!qfRequireEdit())return;
+ const d=qfDrafts.find(x=>x.id===id);if(!d)return;
+ const p=d.payload||{};
+ qfDraftPause=true;
+ if(d.kind==='letterhead'){
+  editingLetterhead=p.edit_id||null;
+  $('letterheadTitle').textContent=editingLetterhead?'Continue letterhead':'New letterhead draft';
+  $('letterheadForm').reset();show('letterheadEdit');
+ }else{
+  editId=p.edit_id||null;editKind=d.kind;
+  const initial={kind:d.kind,document_number:p.fields?.document_number||nextNumber(d.kind),customer_id:p.fields?.customer_id||customers[0]?.id,issue_date:date(),due_date:date(),discount_amount:0,vat_rate:0,notes:''};
+  openDoc(initial,p.lines?.length?p.lines:[{description:'',quantity:1,unit_price:0}]);
+ }
+ const form=$(d.kind==='letterhead'?'letterheadForm':'docForm');
+ for(const [name,value] of Object.entries(p.fields||{})){if(form.elements[name])form.elements[name].value=value}
+ if(d.kind!=='letterhead')calcForm();
+ qfDraftPause=false;
+ qfDraftStart(d.kind,d.draft_key);
+ qfDraftLastHash=JSON.stringify(qfDraftSnapshot());
+}
+async function qfDeleteDraft(id){
+ if(!qfRequireEdit())return;
+ if(!confirm('Discard this unfinished draft?'))return;
+ const r=await sb.from('document_drafts').delete().eq('business_id',business.id).eq('id',id);
+ if(r.error)return alert('Could not discard draft: '+r.error.message);
+ await qfDraftLoad();
+}
+async function qfDraftComplete(){
+ if(qfDraftTimer){clearTimeout(qfDraftTimer);qfDraftTimer=null}
+ if(qfDraftSaving)await qfDraftSaving;
+ const key=qfDraftKey;
+ qfDraftKey=null;qfDraftKind=null;qfDraftLastHash='';
+ if(key&&business)await sb.from('document_drafts').delete().eq('business_id',business.id).eq('draft_key',key);
+ await qfDraftLoad();
+}
+function qfCanEdit(){return !!(entitlement&&entitlement.document_creation_allowed)}
+function qfRequireEdit(){if(qfCanEdit())return true;const e=entitlement||{};let msg='A subscription is required to create, edit, delete or restore records.';if(e.access_state==='trial_expired')msg='Your free trial has ended. Please subscribe to continue.';else if(e.access_state==='limit_reached'&&e.plan==='trial')msg='You have used your 3 free documents. Please subscribe to continue.';else if(e.access_state==='payment_overdue')msg='Your subscription payment is overdue. Please renew to continue.';else if(e.access_state==='inactive')msg='Your subscription is inactive. Please subscribe to continue.';else if(e.access_state==='limit_reached')msg='You have reached your monthly document limit. Please upgrade or wait for the next billing period.';alert(msg+'\n\nBilling: accounts@quoteflowsa.co.za');return false}
+function qfReadOnlyUI(){
+ const locked=!!business&&!qfCanEdit();
+ // Keep action buttons visible. The click handlers explain why editing is restricted.
+ for(const id of ['businessForm','customerForm','docForm','letterheadForm','paymentForm']){
+  const form=$(id);if(!form)continue;
+  form.querySelectorAll('input,textarea,select').forEach(el=>{el.disabled=locked});
+  form.querySelectorAll('button[type=submit]').forEach(el=>{el.disabled=false});
+ }
+ $('qfReadOnlyBanner')?.classList.toggle('hide',!locked);
+}
+async function qfTrashDoc(kind,id){
+ if(!qfRequireEdit())return;
+ const item=(kind==='letterhead'?letterheads:docs).find(x=>x.id===id);
+ if(!item||item.deleted_at)return;
+ if(kind==='invoice'&&payments.some(p=>p.invoice_id===id))return alert('Invoices with recorded payments must be retained for accounting.');
+ if(!confirm('Move this '+kind+' to Trash? This does not restore document credits.'))return;
+ const table=kind==='letterhead'?'letterheads':'documents';
+ const r=await sb.from(table).update({deleted_at:new Date().toISOString()}).eq('id',id).eq('business_id',business.id).select('id');
+ if(r.error)return alert('Delete blocked: '+r.error.message);
+ if(!r.data?.length)return alert('Delete blocked by subscription permissions.');
+ await load();show(kind==='letterhead'?'letterheads':kind==='invoice'?'invoices':'quotations');
+}
+async function qfRestoreDoc(kind,id){
+ if(!qfRequireEdit())return;
+ if(!confirm('Restore this document?'))return;
+ const table=kind==='letterhead'?'letterheads':'documents';
+ const r=await sb.from(table).update({deleted_at:null}).eq('id',id).eq('business_id',business.id).select('id');
+ if(r.error)return alert('Restore blocked: '+r.error.message);
+ if(!r.data?.length)return alert('Restore blocked by subscription permissions.');
+ await load();show('trash');
+}
+async function qfEmptyTrash(){
+ if(!qfRequireEdit())return;
+ const trashedDocs=docs.filter(d=>d.deleted_at&&!d.purged_at);
+ const trashedLetters=letterheads.filter(d=>d.deleted_at&&!d.purged_at);
+ const count=trashedDocs.length+trashedLetters.length;
+ if(!count)return alert('Trash is already empty.');
+ if(!confirm('Empty Trash? '+count+' document(s) will disappear from your account and cannot be restored. Quota and audit records remain.'))return;
+ if(prompt('Type EMPTY to confirm removing '+count+' document(s):')!=='EMPTY')return;
+ const time=new Date().toISOString();let errors=[];
+ for(const [table,items] of [['documents',trashedDocs],['letterheads',trashedLetters]]){
+  for(const item of items){
+   const r=await sb.from(table).update({purged_at:time}).eq('business_id',business.id).eq('id',item.id).not('deleted_at','is',null).is('purged_at',null).select('id');
+   if(r.error||!r.data?.length)errors.push((item.document_number||item.subject||item.id)+': '+(r.error?.message||'not permitted'));
+  }
+ }
+ await load();show('trash');
+ alert(errors.length?'Some records could not be emptied:\n'+errors.join('\n'):'Trash emptied. Audit records remain securely retained.');
+}
+let qfDemoDocs=[{id:1,name:'DEMO quotation',state:'active'},{id:2,name:'DEMO letterhead',state:'active'}];
+function qfDemoMove(id){if(!confirm('Demo: move this item to Trash?'))return;qfDemoDocs.find(d=>d.id===id).state='trash';qfRenderDemo()}
+function qfDemoRestore(id){qfDemoDocs.find(d=>d.id===id).state='active';qfRenderDemo()}
+function qfDemoEmpty(){const n=qfDemoDocs.filter(d=>d.state==='trash').length;if(!n)return alert('Demo Trash is empty.');if(!confirm('Demo only: empty '+n+' item(s) from Trash?'))return;qfDemoDocs=qfDemoDocs.filter(d=>d.state!=='trash');qfRenderDemo()}
+function qfDemoReset(){qfDemoDocs=[{id:1,name:'DEMO quotation',state:'active'},{id:2,name:'DEMO letterhead',state:'active'}];qfRenderDemo()}
+function qfRenderDemo(){const el=$('qfTrashDemo');if(!el)return;el.innerHTML='<p><strong>Active demo items</strong></p>'+qfDemoDocs.filter(d=>d.state==='active').map(d=>`<p>${esc(d.name)} <button class="btn small secondary" onclick="qfDemoMove(${d.id})">Delete to Trash</button></p>`).join('')+'<p><strong>Demo Trash</strong></p>'+(qfDemoDocs.filter(d=>d.state==='trash').map(d=>`<p>${esc(d.name)} <button class="btn small secondary" onclick="qfDemoRestore(${d.id})">Restore</button></p>`).join('')||'<p class="muted">Empty</p>')+'<button class="btn small secondary" onclick="qfDemoEmpty()">Empty Demo Trash</button> <button class="btn small secondary" onclick="qfDemoReset()">Reset Demo</button>'}
+function qfRenderTrash(){
+ const all=[...docs.filter(x=>x.deleted_at&&!x.purged_at).map(x=>({...x,trashKind:x.kind,trashLabel:x.document_number})),
+ ...letterheads.filter(x=>x.deleted_at&&!x.purged_at).map(x=>({...x,trashKind:'letterhead',trashLabel:x.subject}))];
+ const el=$('qfTrashList');if(!el)return;
+ el.innerHTML=all.length?'<div class="tablewrap"><table><thead><tr><th>Type</th><th>Document</th><th>Deleted</th><th>Action</th></tr></thead><tbody>'+
+ all.sort((a,b)=>String(b.deleted_at).localeCompare(String(a.deleted_at))).map(x=>`<tr><td>${esc(x.trashKind)}</td><td>${esc(x.trashLabel||'Document')}</td><td>${esc(new Date(x.deleted_at).toLocaleDateString('en-ZA'))}</td><td><button class="btn small secondary" onclick="qfRestoreDoc('${x.trashKind}','${x.id}')">Restore</button></td></tr>`).join('')+'</tbody></table></div>':'<div class="empty">Your Trash is empty.</div>';
+}
+function render(){if(!business&&view!=='business')return;if(view==='dashboard')renderDashboard();if(view==='quotations'||view==='invoices')renderDocs();if(view==='customers')renderCustomers();if(view==='payments')renderPayments();if(view==='business')renderBusiness();if(view==='letterheads')renderLetterheads();if(view==='trash'){qfRenderTrash();qfRenderDemo();}qfReadOnlyUI();if(view==='subscription'){qfRenderRequestHistory();qfRenderSubscriptionActivity()}}
+function renderDashboard(){const visibleDocs=docs.filter(x=>!x.deleted_at&&!x.purged_at);const inv=visibleDocs.filter(x=>x.kind==='invoice'),received=payments.reduce((s,p)=>s+Number(p.amount),0);$('welcome').textContent=business?`Welcome, ${business.name}`:'Your business, beautifully organised.';$('stats').innerHTML=[['Quotations',visibleDocs.filter(x=>x.kind==='quotation').length],['Invoiced',money(inv.reduce((s,d)=>s+totals(d).total,0))],['Payments received',money(received)],['Outstanding',money(inv.reduce((s,d)=>s+balance(d),0))]].map(([a,b])=>`<div class="card"><small>${a}</small><b>${b}</b></div>`).join('');$('recent').innerHTML=visibleDocs.length?`<div class="tablewrap"><table><tbody>${visibleDocs.slice().sort((a,b)=>b.created_at.localeCompare(a.created_at)).slice(0,5).map(d=>`<tr><td><strong>${esc(d.document_number)}</strong><div class="muted mini">${esc(customerName(d))}</div></td><td>${money(totals(d).total)}</td><td><button class="btn small secondary" onclick="printDoc('${d.id}')">PDF</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No documents yet. Create your first quotation.</div>'}
+const qfPages={quotations:1,invoices:1,customers:1,payments:1},QF_PAGE_SIZE=15;
+function qfChange(kind){qfPages[kind]=1;if(kind==='quotations'||kind==='invoices')renderDocs();else if(kind==='customers')renderCustomers();else if(kind==='payments')renderPayments()}
+function qfQuery(kind){return ($('qfSearch_'+kind)?.value||'').trim().toLocaleLowerCase()}
+function qfPage(kind,list){const pages=Math.max(1,Math.ceil(list.length/QF_PAGE_SIZE));qfPages[kind]=Math.min(Math.max(1,qfPages[kind]||1),pages);$('qfCount_'+kind).textContent=list.length+' matching record'+(list.length===1?'':'s');$('qfPager_'+kind).innerHTML=list.length>QF_PAGE_SIZE?`<button onclick="qfMove('${kind}',-1)" ${qfPages[kind]===1?'disabled':''}>← Previous</button><span>Page ${qfPages[kind]} of ${pages}</span><button onclick="qfMove('${kind}',1)" ${qfPages[kind]===pages?'disabled':''}>Next →</button>`:'';return list.slice((qfPages[kind]-1)*QF_PAGE_SIZE,qfPages[kind]*QF_PAGE_SIZE)}
+function qfMove(kind,direction){qfPages[kind]+=direction;qfChangePage(kind)}
+function qfChangePage(kind){if(kind==='quotations'||kind==='invoices')renderDocs();else if(kind==='customers')renderCustomers();else renderPayments()}
+function qfOrder(kind,a,b){const field=kind==='payments'?'paid_on':'created_at';const x=String(a[field]||''),y=String(b[field]||'');const delta=y.localeCompare(x);return $('qfSort_'+kind)?.value==='oldest'?-delta:delta}
+function renderDocs(){const kind=view==='quotations'?'quotation':'invoice',group=view,search=qfQuery(group),status=$('qfStatus_invoices')?.value||'all';const filtered=docs.filter(d=>d.kind===kind&&!d.deleted_at&&!d.purged_at).filter(d=>!search||[d.document_number,customerName(d),d.issue_date,d.status].some(x=>String(x||'').toLowerCase().includes(search))).filter(d=>kind!=='invoice'||status==='all'||(status==='paid'&&balance(d)<=0)||(status==='partial'&&paid(d)>0&&balance(d)>0)||(status==='unpaid'&&paid(d)<=0));const list=qfPage(group,filtered.sort((a,b)=>qfOrder(group,a,b)));$(kind==='quotation'?'quoteList':'invoiceList').innerHTML=list.length?`<div class="tablewrap"><table><thead><tr><th>Number</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>${list.map(d=>`<tr><td><strong>${esc(d.document_number)}</strong></td><td>${esc(customerName(d))}</td><td>${esc(d.issue_date)}</td><td>${money(totals(d).total)}</td><td><span class="status ${kind==='invoice'&&balance(d)===0?'paid':''}">${kind==='quotation'?'Quotation':balance(d)===0?'Paid':paid(d)>0?'Partially Paid':'Unpaid'}</span></td><td><div class="actions" style="justify-content:flex-end"><button class="btn small secondary" onclick="editDoc('${d.id}')">Edit</button><button class="btn small danger" onclick="qfTrashDoc('${kind}','${d.id}')">Delete</button><button class="btn small secondary" onclick="printDoc('${d.id}')">PDF</button>${kind==='quotation'?`<button class="btn small" onclick="qfConvertGuard('${d.id}')">Convert</button>`:`<button class="btn small" onclick="startPayment('${d.id}')" ${balance(d)<=0?'disabled':''}>Payment</button>`}</div></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No '+kind+'s yet.</div>'}
+function renderCustomers(){const search=qfQuery('customers'),list=qfPage('customers',customers.filter(c=>[c.name,c.email,c.phone,c.address].some(x=>String(x||'').toLowerCase().includes(search))).sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''))));$('customerList').innerHTML=list.length?`<div class="tablewrap"><table><thead><tr><th>Customer</th><th>Email</th><th>Phone</th><th>Action</th></tr></thead><tbody>${list.map(c=>`<tr><td><strong>${esc(c.name)}</strong></td><td>${esc(c.email)}</td><td>${esc(c.phone)}</td><td><button class="btn small secondary" onclick="customerForm('${c.id}')">Edit</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Add a customer to begin.</div>'}
+function renderPayments(){const search=qfQuery('payments'),list=qfPage('payments',payments.filter(p=>{const d=docs.find(x=>x.id===p.invoice_id);return [d?.document_number,customerName(d||{}),p.reference,p.method,p.paid_on].some(x=>String(x||'').toLowerCase().includes(search))}).sort((a,b)=>qfOrder('payments',a,b)));$('paymentList').innerHTML=list.length?`<div class="tablewrap"><table><thead><tr><th>Invoice</th><th>Date</th><th>Method</th><th>Amount</th><th>Receipt</th></tr></thead><tbody>${list.map(p=>{const d=docs.find(x=>x.id===p.invoice_id);return `<tr><td>${esc(d?.document_number||'Invoice')}</td><td>${esc(p.paid_on)}</td><td>${esc(p.method)}</td><td>${money(p.amount)}</td><td><button class="btn small secondary" onclick="printReceipt('${p.id}')">Print receipt</button></td></tr>`}).join('')}</tbody></table></div>`:'<div class="empty">No payments recorded.</div>'}
+let qfPendingLogo=undefined;
+function qfLogoValid(value){return typeof value==='string'&&/^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(value)&&value.length<=190000}
+function qfLogoPreview(value){const area=$('qfLogoPreview');area.replaceChildren();if(qfLogoValid(value)){const img=document.createElement('img');img.src=value;img.alt='Your business logo preview';area.appendChild(img)}else{const txt=document.createElement('span');txt.className='muted';txt.textContent='No logo selected';area.appendChild(txt)}}
+function qfReadLogo(file){return new Promise((resolve,reject)=>{if(!file)return reject(Error('No image selected'));if(!['image/png','image/jpeg','image/webp'].includes(file.type))return reject(Error('Choose a PNG, JPG or WebP image.'));if(file.size>5*1024*1024)return reject(Error('Image must be smaller than 5 MB.'));const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{try{const ratio=Math.min(1,480/img.naturalWidth,240/img.naturalHeight);const w=Math.max(1,Math.round(img.naturalWidth*ratio)),h=Math.max(1,Math.round(img.naturalHeight*ratio));const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(img,0,0,w,h);let data=canvas.toDataURL('image/png');if(data.length>180000){data=canvas.toDataURL('image/webp',.84)}if(data.length>180000)throw Error('Logo is still too large after resizing. Choose a simpler image.');resolve(data)}catch(e){reject(e)}finally{URL.revokeObjectURL(url)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('Could not read the image.'))};img.src=url})}
+$('qfLogoFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;const msg=$('qfLogoMessage');msg.textContent='Preparing logo…';try{const data=await qfReadLogo(file);qfPendingLogo=data;qfLogoPreview(data);msg.textContent='Logo ready. Tap Save business settings to keep it.'}catch(err){msg.textContent=err.message;e.target.value=''}});
+$('qfRemoveLogo').addEventListener('click',()=>{qfPendingLogo=null;$('qfLogoFile').value='';qfLogoPreview(null);$('qfLogoMessage').textContent='Logo will be removed when you save.'});
+function renderBusiness(){const f=getForm('businessForm');['name','registration_number','email','phone','address','vat_number','bank_details'].forEach(k=>f[k].value=business?.[k]||'');f.document_template.value=business?.document_template||'corporate';f.brand_color.value=business?.brand_color||'#1473a9';f.document_header_layout.value=business?.document_header_layout||'side_by_side';f.document_footer_message.value=business?.document_footer_message||'';qfPendingLogo=undefined;$('qfLogoFile').value='';$('qfLogoMessage').textContent='';qfLogoPreview(business?.logo_data)}
+$('businessForm').onsubmit=async e=>{e.preventDefault();if(business&&!qfRequireEdit())return;busy(true);try{const f=getForm('businessForm'),payload={};['name','registration_number','email','phone','address','vat_number','bank_details'].forEach(k=>payload[k]=f[k].value.trim()||null);payload.document_template=f.document_template.value;payload.brand_color=f.brand_color.value;payload.document_header_layout=f.document_header_layout.value;payload.document_footer_message=f.document_footer_message.value.trim()||null;if(qfPendingLogo!==undefined)payload.logo_data=qfPendingLogo;if(!payload.name)throw Error('Business name required');let r;if(business)r=await sb.from('businesses').update(payload).eq('id',business.id).select().single();else r=await sb.from('businesses').insert(payload).select().single();if(r.error)throw r.error;business=r.data;alert('Business saved securely.');await load();show('dashboard')}catch(e){warn(e)}finally{busy(false)}};
+function customerForm(id){if(!qfRequireEdit())return;if(!business)return alert('Save your business settings first.');editCustomer=id||null;const c=customers.find(x=>x.id===id);$('customerTitle').textContent=c?'Edit customer':'Add customer';const f=getForm('customerForm');['name','email','phone','address'].forEach(k=>f[k].value=c?.[k]||'');show('customerEdit')}
+$('customerForm').onsubmit=async e=>{e.preventDefault();if(business&&!qfRequireEdit())return;busy(true);try{const f=getForm('customerForm'),payload={business_id:business.id};['name','email','phone','address'].forEach(k=>payload[k]=f[k].value.trim()||null);let r=editCustomer?await sb.from('customers').update(payload).eq('id',editCustomer):await sb.from('customers').insert(payload);if(r.error)throw r.error;await load();show('customers')}catch(e){warn(e)}finally{busy(false)}};
+function nextNumber(kind){const prefix=kind==='quotation'?'QUO':'INV';let max=0;docs.filter(x=>x.kind===kind).forEach(x=>{const m=x.document_number.match(new RegExp('^'+prefix+'-(\\d+)$'));if(m)max=Math.max(max,Number(m[1]))});return prefix+'-'+String(max+1).padStart(4,'0')}
+function newDoc(kind){if(!qfRequireEdit())return;if(!business)return alert('Save your business settings first.');if(!customers.length)return alert('Add a customer first.');editId=null;editKind=kind;openDoc({kind,document_number:nextNumber(kind),customer_id:customers[0].id,issue_date:date(),due_date:date(),discount_amount:0,vat_rate:0,notes:''},[{description:'',quantity:1,unit_price:0}])}
+function editDoc(id){if(!qfRequireEdit())return;const d=docs.find(x=>x.id===id);if(!d)return;editId=id;editKind=d.kind;openDoc(d,docItems(d))}
+function openDoc(d,lines){$('docTitle').textContent=(editId?'Edit ':'New ')+(editKind==='quotation'?'quotation':'invoice');const f=getForm('docForm');['document_number','issue_date','due_date','notes','discount_amount'].forEach(k=>f[k].value=d[k]??'');f.vat_percent.value=round(Number(d.vat_rate||0)*100);f.customer_id.innerHTML=customers.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');f.customer_id.value=d.customer_id;$('items').innerHTML='';lines.forEach(x=>addItem(x));show('docEdit');calcForm();qfDraftStart(editKind,editId?'edit-'+editId:'new-'+editKind)}
+function addItem(i={description:'',quantity:1,unit_price:0}){const row=document.createElement('div');row.className='item';row.innerHTML=`<div class="field desc"><label>Description</label><input class="descInput" required maxlength="500" value="${esc(i.description)}"></div><div class="field"><label>Quantity</label><input class="qtyInput" type="number" min="0.001" step="0.001" required value="${esc(i.quantity)}"></div><div class="field"><label>Unit price (R)</label><input class="priceInput" type="number" min="0" step="0.01" required value="${esc(i.unit_price)}"></div><button class="btn small danger" type="button">×</button>`;row.querySelector('button').onclick=()=>{if($('items').children.length===1)return alert('At least one item is required.');row.remove();calcForm()};row.querySelectorAll('input').forEach(el=>el.addEventListener('input',calcForm));$('items').append(row);calcForm()}
+function formLines(){return [...$('items').children].map((r,idx)=>({description:r.querySelector('.descInput').value.trim(),quantity:Number(r.querySelector('.qtyInput').value),unit_price:Number(r.querySelector('.priceInput').value),position:idx}))}
+function calcForm(){const f=getForm('docForm'),ls=formLines(),subtotal=ls.reduce((s,x)=>s+x.quantity*x.unit_price,0),discount=Math.min(subtotal,Math.max(0,Number(f.discount_amount.value)||0)),vat=round((subtotal-discount)*(Number(f.vat_percent.value)||0)/100);$('totals').innerHTML=`<div><span>Subtotal</span><span>${money(subtotal)}</span></div><div><span>Discount</span><span>− ${money(discount)}</span></div><div><span>VAT</span><span>${money(vat)}</span></div><div class="grand"><span>Total</span><span>${money(subtotal-discount+vat)}</span></div>`}
+['discount_amount','vat_percent'].forEach(k=>getForm('docForm')[k].addEventListener('input',calcForm));
+$('docForm').onsubmit=async e=>{e.preventDefault();if(business&&!qfRequireEdit())return;if(!business)return;busy(true);try{const f=getForm('docForm'),ls=formLines(),subtotal=ls.reduce((s,x)=>s+x.quantity*x.unit_price,0),discount=Number(f.discount_amount.value||0),vatPercent=Number(f.vat_percent.value||0);if(!ls.length||ls.some(x=>!x.description||!Number.isFinite(x.quantity)||x.quantity<=0||!Number.isFinite(x.unit_price)||x.unit_price<0))throw Error('Enter valid descriptions, quantities and prices.');if(!Number.isFinite(discount)||discount<0||discount>subtotal)throw Error('Discount cannot exceed subtotal.');if(!Number.isFinite(vatPercent)||vatPercent<0||vatPercent>100)throw Error('Invalid VAT rate.');const payload={business_id:business.id,kind:editKind,document_number:f.document_number.value.trim(),customer_id:f.customer_id.value,issue_date:f.issue_date.value,due_date:f.due_date.value||null,notes:f.notes.value,discount_amount:round(discount),vat_rate:vatPercent/100};if(editId){const old=docs.find(x=>x.id===editId);if(old?.kind==='invoice'&&round((subtotal-discount)*(1+vatPercent/100))<paid(old)-0.005)throw Error('Total cannot be lower than payments already recorded.')}let r=editId?await sb.from('documents').update(payload).eq('id',editId).select().single():await sb.from('documents').insert(payload).select().single();if(r.error)throw r.error;const id=r.data.id;if(editId){const del=await sb.from('document_items').delete().eq('document_id',id);if(del.error)throw del.error}const ins=await sb.from('document_items').insert(ls.map(x=>({...x,business_id:business.id,document_id:id})));if(ins.error)throw Error('Document saved, but line items failed: '+ins.error.message+'. Please reopen and save again.');await qfDraftComplete();await load();show(editKind==='quotation'?'quotations':'invoices');alert('Document saved to cloud.')}catch(e){warn(e)}finally{busy(false)}};
+async function convert(id){const q=docs.find(x=>x.id===id&&x.kind==='quotation');if(!q)return;if(docs.some(x=>x.source_quotation_id===id))return alert('This quotation has already been converted.');if(!confirm('Convert '+q.document_number+' into an invoice?'))return;busy(true);try{const {id:unused,created_at:ignored,...rest}=q;const payload={...rest,kind:'invoice',document_number:nextNumber('invoice'),source_quotation_id:q.id,issue_date:date(),status:'unpaid'};const r=await sb.from('documents').insert(payload).select().single();if(r.error)throw r.error;const ls=docItems(q).map(({id:unused2,document_id:oldId,...x})=>({...x,document_id:r.data.id}));if(ls.length){const ins=await sb.from('document_items').insert(ls);if(ins.error)throw Error('Invoice created but items failed to copy. Please inspect it.')}await load();show('invoices')}catch(e){warn(e)}finally{busy(false)}}
+function startPayment(id){if(!qfRequireEdit())return;const d=docs.find(x=>x.id===id&&x.kind==='invoice');if(!d||balance(d)<=0)return;paymentDoc=id;$('paySummary').textContent=`${d.document_number} · Outstanding: ${money(balance(d))}`;const f=getForm('paymentForm');f.amount.value=balance(d).toFixed(2);f.amount.max=balance(d);f.paid_on.value=date();f.reference.value='';show('paymentEdit')}
+$('paymentForm').onsubmit=async e=>{e.preventDefault();if(business&&!qfRequireEdit())return;busy(true);try{const f=getForm('paymentForm'),d=docs.find(x=>x.id===paymentDoc),amount=round(Number(f.amount.value));if(!d||!Number.isFinite(amount)||amount<=0||amount>balance(d)+0.001)throw Error('Payment exceeds outstanding balance or is invalid.');const r=await sb.from('payments').insert({business_id:business.id,invoice_id:d.id,amount,paid_on:f.paid_on.value,method:f.method.value,reference:f.reference.value.trim()});if(r.error)throw r.error;await load();show('payments');alert('Payment recorded.')}catch(e){warn(e)}finally{busy(false)}};
+
+function renderLetterheads(){
+ $('letterheadList').innerHTML=letterheads.some(l=>!l.deleted_at&&!l.purged_at)?`<div class="tablewrap"><table><thead><tr><th>Date</th><th>Subject</th><th>Recipient</th><th>Actions</th></tr></thead><tbody>${letterheads.filter(l=>!l.deleted_at&&!l.purged_at).slice().sort((a,b)=>b.created_at.localeCompare(a.created_at)).map(l=>`<tr><td>${esc(l.letter_date)}</td><td>${esc(l.subject)}</td><td>${esc(l.recipient)}</td><td><div class="actions"><button class="btn small secondary" onclick="editLetterhead('${l.id}')">Edit</button><button class="btn small danger" onclick="qfTrashDoc('letterhead','${l.id}')">Delete</button><button class="btn small secondary" onclick="printLetterhead('${l.id}')">PDF</button></div></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No letterheads yet. Create your first business letter.</div>';
+}
+function newLetterhead(){if(!qfRequireEdit())return;editingLetterhead=null;$('letterheadTitle').textContent='New letterhead';$('letterheadForm').reset();getForm('letterheadForm').letter_date.value=date();show('letterheadEdit');qfDraftStart('letterhead','new-letterhead')}
+function editLetterhead(id){if(!qfRequireEdit())return;const l=letterheads.find(x=>x.id===id);if(!l)return;editingLetterhead=id;$('letterheadTitle').textContent='Edit letterhead';const f=getForm('letterheadForm');['letter_date','reference','recipient','subject','message','sender_name','designation'].forEach(k=>f[k].value=l[k]||'');show('letterheadEdit');qfDraftStart('letterhead','edit-'+id)}
+$('letterheadForm').onsubmit=async e=>{e.preventDefault();if(business&&!qfRequireEdit())return;if(!business)return;busy(true);try{const f=getForm('letterheadForm'),fields=['letter_date','reference','recipient','subject','message','sender_name','designation'];const payload={business_id:business.id};fields.forEach(k=>payload[k]=f[k].value.trim());const r=editingLetterhead?await sb.from('letterheads').update(payload).eq('id',editingLetterhead).select().single():await sb.from('letterheads').insert(payload).select().single();if(r.error)throw r.error;editingLetterhead=r.data.id;await qfDraftComplete();await load();show('letterheads');alert('Letterhead saved.')}catch(err){warn(err)}finally{busy(false)}};
+function printLetterhead(id){const l=letterheads.find(x=>x.id===id);if(!l){alert('Save your letterhead before printing.');return}
+ const linebreak=x=>esc(x||'').replace(/\n/g,'<br>');
+ $('printArea').innerHTML=`<div class="docpaper qf-paper" ${qfTheme()} style="min-height:260mm;display:flex;flex-direction:column"><div class="qf-top">${qfCompany()}<div style="text-align:right;font-size:12px">${esc(l.letter_date)}<br>${l.reference?'Ref: '+esc(l.reference):''}</div></div><div style="margin-top:34px"><div><b>To:</b> ${esc(l.recipient)}</div><h2 style="font-size:18px;margin:25px 0 20px">${esc(l.subject)}</h2><div style="line-height:1.75;white-space:normal">${linebreak(l.message)}</div></div><div style="margin-top:auto;padding-top:50px"><div style="width:240px;border-top:1px solid #64748b;padding-top:8px">Signature</div><div style="margin-top:18px"><b>${esc(l.sender_name)}</b><br>${esc(l.designation)}</div></div><div style="margin-top:28px">${qfFooter()}</div></div>`;window.print();}
+
+function qfTheme(){const choices={corporate:['#11294d','#f1f6fb'],construction:['#34373b','#fff2e7'],modern:['#12443f','#eaf8f5'],elegant:['#423048','#f8f1f8'],bold:['#32262b','#fff0f1'],minimal:['#30343a','#f5f5f5']};const key=choices[business?.document_template]?business.document_template:'corporate';const ink=choices[key][0],soft=choices[key][1];const accent=/^#[0-9a-f]{6}$/i.test(business?.brand_color||'')?business.brand_color:'#1473a9';return `data-template="${key}" data-header="${qfHeaderLayout()}" style="--qf-ink:${ink};--qf-accent:${accent};--qf-soft:${soft}"`;}
+function qfHeaderLayout(){const allowed=['side_by_side','stacked','centered'];return allowed.includes(business?.document_header_layout)?business.document_header_layout:'side_by_side';}
+function qfInvoiceStatus(d){if(d.kind!=='invoice')return d.status||'Quotation';const total=totals(d).total,amount=paid(d);return total>0&&amount>=total-0.005?'Paid':amount>0?'Partially Paid':'Unpaid';}
+function qfCompany(){
+  const logo=qfLogoValid(business?.logo_data)?`<img class="qf-logo-paper" src="${business.logo_data}" alt="Business logo">`:'';
+  return `<div class="qf-logo-company">${logo}<div class="qf-company-text"><div class="qf-company">${esc(business.name||'Business')}</div><div>${esc(business.address||'').replace(/\n/g,'<br>')}</div><div>${esc(business.email||'')} ${business.phone?' · '+esc(business.phone):''}</div>${business.registration_number?`<div>Reg: ${esc(business.registration_number)}</div>`:''}${business.vat_number?`<div>VAT: ${esc(business.vat_number)}</div>`:''}</div></div>`;
+}
+function qfFooter(){const personal=business?.document_footer_message?`<div class="qf-personal-footer">${esc(business.document_footer_message)}</div>`:'';return `${personal}<div class="qf-footer">Document prepared using QuoteFlow SA · Powered by Thaba Tech Corporation<br>Payment receipts acknowledge a recorded payment; confirm funds against bank records.</div>`}
+function printDoc(id){
+ const d=docs.find(x=>x.id===id);if(!d)return;
+ const c=customers.find(x=>x.id===d.customer_id),t=totals(d);
+ $('printArea').innerHTML=`<div class="docpaper qf-paper" ${qfTheme()}>
+ <div class="qf-top"><div>${qfCompany()}</div><div><div class="qf-title">${d.kind==='quotation'?'QUOTATION':'INVOICE'}</div><div style="text-align:right"><b>${esc(d.document_number)}</b><br>Issued: ${esc(d.issue_date)}<br>${d.due_date?'Due: '+esc(d.due_date):''}</div></div></div>
+ <div class="qf-meta"><div class="qf-box"><h3>Prepared for</h3><b>${esc(c?.name||'Customer')}</b><br>${esc(c?.address||'').replace(/\n/g,'<br>')}<br>${esc(c?.email||'')}</div><div class="qf-box"><h3>Document details</h3>Reference: ${esc(d.document_number)}<br>Status: ${esc(qfInvoiceStatus(d))}<br>Currency: ZAR</div></div>
+ <table class="qf-table"><thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>Amount</th></tr></thead><tbody>${docItems(d).map(x=>`<tr><td>${esc(x.description)}</td><td>${esc(x.quantity)}</td><td>${money(x.unit_price)}</td><td>${money(x.quantity*x.unit_price)}</td></tr>`).join('')}</tbody></table>
+ <div class="qf-summary"><div><span>Subtotal</span><span>${money(t.subtotal)}</span></div><div><span>Discount</span><span>− ${money(t.discount)}</span></div><div><span>VAT</span><span>${money(t.vat)}</span></div><div class="qf-total"><span>Total</span><span>${money(t.total)}</span></div>${d.kind==='invoice'?`<div><span>Paid</span><span>${money(paid(d))}</span></div><div><b>Balance due</b><b>${money(balance(d))}</b></div>`:''}</div>
+ ${business.bank_details?`<div class="qf-box"><h3>Payment details</h3>${esc(business.bank_details).replace(/\n/g,'<br>')}</div>`:''}
+ ${d.notes?`<p class="qf-note"><b>Notes</b><br>${esc(d.notes)}</p>`:''}
+ ${qfFooter()}</div>`;window.print();
+}
+function printReceipt(id){
+ const p=payments.find(x=>x.id===id),d=docs.find(x=>x.id===p?.invoice_id);if(!p||!d)return;
+ $('printArea').innerHTML=`<div class="docpaper qf-paper" ${qfTheme()}>
+ <div class="qf-top"><div>${qfCompany()}</div><div><div class="qf-title">RECEIPT</div><div style="text-align:right">Payment reference<br><b>${esc(p.reference||p.id.slice(0,8))}</b></div></div></div>
+ <div class="qf-meta"><div class="qf-box"><h3>Received from</h3><b>${esc(customerName(d))}</b></div><div class="qf-box"><h3>Payment details</h3>Invoice: ${esc(d.document_number)}<br>Date: ${esc(p.paid_on)}<br>Method: ${esc(p.method||'Not specified')}</div></div>
+ <div class="qf-box"><div class="qf-kicker">Payment recorded</div><div class="qf-amount">${money(p.amount)}</div><div>Remaining invoice balance: <b>${money(balance(d))}</b></div></div>
+ <p class="qf-note">This receipt reflects a payment recorded by the business. It is not independent proof of bank settlement.</p>
+ ${qfFooter()}</div>`;window.print();
+}
+async function init(){if(!window.supabase?.createClient){message('Could not load the Supabase library. Please check your internet connection.',true);return}sb=window.supabase.createClient(PROJECT_URL,PUBLIC_KEY,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});const r=await sb.auth.getSession();if(r.data.session)await enter(r.data.session);sb.auth.onAuthStateChange((event,s)=>{if(event==='SIGNED_OUT')exit();if(event==='PASSWORD_RECOVERY'){authScreen('recovery');$('auth').classList.remove('hide');$('app').classList.add('hide');message('Enter a new password with at least 8 characters.')}})}init().catch(e=>message(e.message,true));
+</script></body></html>
