@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QuoteFlow SA · Control Centre</title><style>
+:root{font-family:system-ui,Arial,sans-serif;color:#142642;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#122747;color:white;padding:19px 5%}main{max-width:1050px;margin:22px auto;padding:0 16px}.card{background:white;border:1px solid #dce4ee;border-radius:14px;padding:20px;margin:15px 0;box-shadow:0 3px 14px #1227470c}h1{font-size:24px;margin:0}h2{font-size:19px}label{display:block;font-weight:600;margin:12px 0 5px}input,select,textarea{width:100%;border:1px solid #bac8d8;border-radius:9px;padding:11px;font:inherit}textarea{min-height:100px}.btn{border:0;background:#1767b4;color:white;padding:11px 16px;border-radius:9px;font-weight:700;cursor:pointer;margin:6px 6px 6px 0}.btn.secondary{background:#e7eef7;color:#163d65}.muted{color:#61728b}.hide{display:none!important}.ticket{border:1px solid #dce4ee;border-radius:11px;padding:14px;margin:12px 0}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.pill{font-size:12px;background:#e9f1fa;padding:5px 9px;border-radius:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit}.message{border-left:3px solid #3b79b9;padding:10px 12px;margin:10px 0;background:#f4f8fc}@media(max-width:550px){.card{padding:14px}}</style></head>
+<body><header><div class="row"><div><h1>QuoteFlow SA · Control Centre</h1><small>Administrator-only · V11.4.2.2 development preview</small></div><button id="logout" class="btn secondary hide">Sign out</button></div></header>
+<main><section id="login" class="card"><h2>Administrator sign in</h2><p class="muted">Use the authorised administrator account. Customer accounts cannot open this panel.</p><form id="loginForm"><label>Email</label><input id="email" type="email" autocomplete="username" required><label>Password</label><input id="password" type="password" autocomplete="off" required><button class="btn" type="submit">Sign in</button></form><p id="loginStatus" role="status"></p></section>
+<section id="panel" class="hide"><div class="card"><div class="row"><div><h2>Support tickets</h2><p class="muted">Ticket inbox and two-way in-app replies. Outgoing email is not yet active.</p></div><button class="btn secondary" id="refresh">Refresh</button></div><div id="tickets">Loading…</div></div><div class="card"><h2>Next modules</h2><p class="muted">Diagnostics show account counts and subscription dates, not private document contents. Error-event logging, customer lookup and billing actions are not active yet. Never ask a customer for their password.</p></div></section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const sb=supabase.createClient('https://ecptvqwrjjfwexmyazmn.supabase.co','sb_publishable_M3Lc-znCP_4QmKniZ4Er-g_w_zgjRQx',{auth:{persistSession:false,autoRefreshToken:true,detectSessionInUrl:false}});
+const $=id=>document.getElementById(id);let active=false;
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function ref(n){return 'QF-SUP-'+String(n).padStart(6,'0')}
+async function start(){
+ const {data,error}=await sb.rpc('qf_is_admin');
+ if(error||data!==true){await sb.auth.signOut();throw Error('Access denied. This account is not an authorised QuoteFlow SA administrator.')}
+ active=true;$('login').classList.add('hide');$('panel').classList.remove('hide');$('logout').classList.remove('hide');await loadTickets();
+}
+$('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();$('loginStatus').textContent='Verifying administrator access…';
+ try{const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('password').value='';if(error)throw error;await start();$('loginStatus').textContent=''}
+ catch(err){$('password').value='';$('loginStatus').textContent=err.message||String(err)}
+});
+$('logout').onclick=async()=>{await sb.auth.signOut();location.reload()};
+$('refresh').onclick=loadTickets;
+async function loadTickets(){
+ if(!active)return;
+ const el=$('tickets');el.textContent='Loading tickets…';
+ const {data,error}=await sb.rpc('qf_admin_ticket_list');
+ if(error){el.textContent=error.message;return}
+ el.innerHTML=data?.length?data.map(t=>`<div class="ticket"><div class="row"><strong>${esc(ref(t.ticket_number))}</strong><span class="pill">${esc(t.status)}</span></div>
+ <p><strong>${esc(t.business_name)}</strong> · ${esc(t.subject)}</p><pre>${esc(t.description)}</pre>
+ <small class="muted">${esc(new Date(t.created_at).toLocaleString('en-ZA'))}</small>
+ <div><button class="btn secondary" onclick="openTicket('${t.id}')">View and respond</button><button class="btn secondary" onclick="loadDiagnostics('${t.id}')">Account diagnostics</button></div><div id="diagnostics-${t.id}" class="hide"></div><div id="detail-${t.id}" class="hide"></div></div>`).join(''):'No tickets yet.';
+}
+
+async function loadDiagnostics(id){
+ const el=$('diagnostics-'+id);el.classList.remove('hide');el.textContent='Checking account…';
+ const {data,error}=await sb.rpc('qf_admin_ticket_diagnostics',{p_ticket_id:id});
+ if(error){el.textContent='Diagnostics unavailable: '+error.message;return}
+ const when=x=>x?new Date(x).toLocaleString('en-ZA'):'Not set';
+ const fields=[
+ ['Business',data.business_name],['Subscription plan',data.plan],
+ ['Trial expiry',when(data.trial_expires_at)],['Renewal due',when(data.renewal_due_at)],
+ ['Temporary developer test access until',when(data.developer_test_until)],
+ ['Saved documents (including deleted)',data.document_count],['Letterheads (including deleted)',data.letterhead_count],
+ ['Cloud drafts',data.draft_count],['Items in Trash',data.trash_count],
+ ['Latest document created',when(data.latest_document_at)]
+ ];
+ el.innerHTML='<div class="card" style="background:#f7f9fc"><strong>Read-only account diagnostics</strong><p class="muted">Counts and dates are for investigation only. No document contents or passwords are displayed. This does not prove why a save failed.</p>'+
+ fields.map(([label,value])=>`<div class="row" style="border-bottom:1px solid #dce4ee;padding:7px 0"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')+
+ '<p class="muted">If the customer reports an error, ask for the approximate time and the action they attempted. Detailed error logs are a future feature.</p></div>';
+}
+async function openTicket(id){
+ const el=$('detail-'+id);el.classList.remove('hide');el.textContent='Loading conversation…';
+ const {data,error}=await sb.from('support_ticket_messages').select('author_type,message,created_at').eq('ticket_id',id).order('created_at',{ascending:true});
+ if(error){el.textContent=error.message;return}
+ el.innerHTML=(data||[]).map(m=>`<div class="message"><strong>${esc(m.author_type)}</strong> · <small>${esc(new Date(m.created_at).toLocaleString('en-ZA'))}</small><pre>${esc(m.message)}</pre></div>`).join('')+
+ `<label>Reply to customer (in-app only)</label><textarea id="reply-${id}" maxlength="5000" placeholder="Write your reply"></textarea>
+ <button class="btn" onclick="sendReply('${id}')">Send reply</button>
+ <label>Ticket status</label><select id="status-${id}"><option value="open">Open</option><option value="in_progress">In progress</option><option value="waiting_for_customer">Waiting for customer</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select><button class="btn secondary" onclick="updateStatus('${id}')">Update status</button><p id="msg-${id}" role="status"></p>`;
+}
+async function sendReply(id){
+ const message=$('reply-'+id).value.trim();if(!message)return;
+ const {data:{user}}=await sb.auth.getUser();
+ const {error}=await sb.from('support_ticket_messages').insert({ticket_id:id,author_id:user.id,author_type:'admin',message});
+ $('msg-'+id).textContent=error?'Could not send reply: '+error.message:'Reply saved. Customer can read it in Help & Support → View conversation. Automatic email is not active.';
+ if(!error)await openTicket(id);
+}
+async function updateStatus(id){
+ const status=$('status-'+id).value;
+ const {error}=await sb.from('support_tickets').update({status,updated_at:new Date().toISOString()}).eq('id',id);
+ $('msg-'+id).textContent=error?'Update failed: '+error.message:'Ticket status updated.';
+ if(!error)await loadTickets();
+}
+</script></body></html>
