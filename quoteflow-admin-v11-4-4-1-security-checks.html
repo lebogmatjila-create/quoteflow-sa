@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QuoteFlow SA · Control Centre</title><style>
+:root{font-family:system-ui,Arial,sans-serif;color:#142642;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#122747;color:white;padding:19px 5%}main{max-width:1050px;margin:22px auto;padding:0 16px}.card{background:white;border:1px solid #dce4ee;border-radius:14px;padding:20px;margin:15px 0;box-shadow:0 3px 14px #1227470c}h1{font-size:24px;margin:0}h2{font-size:19px}label{display:block;font-weight:600;margin:12px 0 5px}input,select,textarea{width:100%;border:1px solid #bac8d8;border-radius:9px;padding:11px;font:inherit}textarea{min-height:100px}.btn{border:0;background:#1767b4;color:white;padding:11px 16px;border-radius:9px;font-weight:700;cursor:pointer;margin:6px 6px 6px 0}.btn.secondary{background:#e7eef7;color:#163d65}.muted{color:#61728b}.hide{display:none!important}.ticket{border:1px solid #dce4ee;border-radius:11px;padding:14px;margin:12px 0}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.pill{font-size:12px;background:#e9f1fa;padding:5px 9px;border-radius:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit}.message{border-left:3px solid #3b79b9;padding:10px 12px;margin:10px 0;background:#f4f8fc}@media(max-width:550px){.card{padding:14px}}</style></head>
+<body><header><div class="row"><div><h1>QuoteFlow SA · Control Centre</h1><small>Administrator-only · V11.4.4.1 development preview</small></div><button id="logout" class="btn secondary hide">Sign out</button></div></header>
+<main><section id="login" class="card"><h2>Administrator sign in</h2><p class="muted">Use the authorised administrator account. Customer accounts cannot open this panel.</p><form id="loginForm"><label>Email</label><input id="email" type="email" autocomplete="username" required><label>Password</label><input id="password" type="password" autocomplete="off" required><button class="btn" type="submit">Sign in</button></form><p id="loginStatus" role="status"></p></section>
+<section id="panel" class="hide"><div class="card"><h2>Security &amp; Recovery Checks</h2><p class="muted">Run a live check of your administrator access and database connection. This does not replace a security audit or database backup.</p><button id="runSecurityChecks" class="btn secondary">Run security checks</button><div id="securityCheckResults" role="status" class="ticket">Not checked yet.</div><p class="muted"><strong>Before launch:</strong> Enable MFA for the administrator account, review database access policies, configure automated backups and test restoring a backup. These steps are not completed by this button.</p></div><div class="card" id="securityBanner"><div class="row"><div><strong>Administrator session security</strong><p class="muted">Automatic sign-out after 3 minutes without activity. A 15-second warning appears before sign-out. Your password is never saved in this page.</p></div><button class="btn secondary" id="lockNow">Lock now</button></div><p id="idleWarning" role="alert" class="hide" style="color:#a63c13;font-weight:700">Session will lock in 15 seconds due to inactivity. Tap or type to remain signed in.</p></div><div class="card"><div class="row"><div><h2>Support tickets</h2><p class="muted">Ticket inbox and two-way in-app replies. Outgoing email is not yet active.</p></div><button class="btn secondary" id="refresh">Refresh</button></div><div id="tickets">Loading…</div></div><div class="card"><h2>Subscription lifecycle simulator</h2><p class="muted">Preview only: does not change a customer plan, collect payment, cancel a subscription, or create billing records.</p>
+<div class="row"><label for="lifeCurrent">Current package</label><select id="lifeCurrent"><option value="trial">Trial</option><option value="starter">Starter</option><option value="business">Business</option><option value="professional">Professional</option></select></div>
+<div class="row"><label for="lifeRequested">Requested change</label><select id="lifeRequested"><option value="starter">Starter</option><option value="business">Business</option><option value="professional">Professional</option><option value="cancel">Cancel renewal</option></select></div>
+<div id="lifePreview" class="ticket"></div></div><div class="card"><div class="row"><div><h2>Subscription requests</h2><p class="muted">Read-only review queue. A request is not a payment or a subscription activation. No payment processing is connected.</p></div><button id="refreshSubs" class="btn secondary">Refresh requests</button></div><div id="subscriptionRequests">Loading…</div></div><div class="card"><h2>Next modules</h2><p class="muted">Diagnostics show account counts and subscription dates, not private document contents. Error-event logging, customer lookup and billing actions are not active yet. Never ask a customer for their password.</p></div></section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const sb=supabase.createClient('https://ecptvqwrjjfwexmyazmn.supabase.co','sb_publishable_M3Lc-znCP_4QmKniZ4Er-g_w_zgjRQx',{auth:{persistSession:false,autoRefreshToken:true,detectSessionInUrl:false}});
+const $=id=>document.getElementById(id);let active=false;
+const IDLE_LIMIT_MS=180000, IDLE_WARNING_MS=15000;
+let lastInteraction=Date.now(), lockInProgress=false;
+function recordActivity(){lastInteraction=Date.now();if($('idleWarning'))$('idleWarning').classList.add('hide')}
+async function lockAdmin(){
+ if(lockInProgress)return;lockInProgress=true;active=false;
+ try{await sb.auth.signOut()}finally{location.reload()}
+}
+['pointerdown','keydown','touchstart','scroll'].forEach(event=>document.addEventListener(event,()=>{if(active)recordActivity()},{passive:true}));
+setInterval(()=>{
+ if(!active||lockInProgress)return;
+ const remaining=IDLE_LIMIT_MS-(Date.now()-lastInteraction);
+ if(remaining<=0){lockAdmin();return}
+ $('idleWarning').classList.toggle('hide',remaining>IDLE_WARNING_MS);
+},1000);
+
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function ref(n){return 'QF-SUP-'+String(n).padStart(6,'0')}
+async function start(){
+ const {data,error}=await sb.rpc('qf_is_admin');
+ if(error||data!==true){await sb.auth.signOut();throw Error('Access denied. This account is not an authorised QuoteFlow SA administrator.')}
+ active=true;recordActivity();$('login').classList.add('hide');$('panel').classList.remove('hide');$('logout').classList.remove('hide');await Promise.all([loadTickets(),loadSubscriptions()]);
+}
+$('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();$('loginStatus').textContent='Verifying administrator access…';
+ try{const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('password').value='';if(error)throw error;await start();$('loginStatus').textContent=''}
+ catch(err){$('password').value='';$('loginStatus').textContent=err.message||String(err)}
+});
+$('logout').onclick=lockAdmin;
+$('lockNow').onclick=lockAdmin;
+$('runSecurityChecks').onclick=runSecurityChecks;
+$('refresh').onclick=loadTickets;
+$('refreshSubs').onclick=loadSubscriptions;
+$('lifeCurrent').onchange=renderLifecycle;
+$('lifeRequested').onchange=renderLifecycle;
+renderLifecycle();
+
+
+
+async function runSecurityChecks(){
+ const el=$('securityCheckResults');el.textContent='Checking…';
+ const checks=[];
+ const {data:{user},error:userError}=await sb.auth.getUser();
+ checks.push(['Authenticated administrator session',!!user&&!userError]);
+ const {data:isAdmin,error:adminError}=await sb.rpc('qf_is_admin');
+ checks.push(['Server-side administrator role',!adminError&&isAdmin===true]);
+ const {error:ticketError}=await sb.rpc('qf_admin_ticket_list');
+ checks.push(['Protected support inbox reachable',!ticketError]);
+ const {error:subError}=await sb.rpc('qf_admin_subscription_overview');
+ checks.push(['Protected subscription requests reachable',!subError]);
+ checks.push(['Local session persistence disabled',true]);
+ el.innerHTML=checks.map(([label,pass])=>`<div class="row" style="padding:7px 0;border-bottom:1px solid #ddd"><span>${esc(label)}</span><strong>${pass?'PASS':'CHECK REQUIRED'}</strong></div>`).join('')+
+ '<p class="muted">These checks do not test MFA, backup restoration, penetration resistance, or all row-level policies.</p>';
+}
+function renderLifecycle(){
+ const current=$('lifeCurrent').value, requested=$('lifeRequested').value;
+ const levels={trial:0,starter:1,business:2,professional:3};
+ const price={starter:79,business:149,professional:249};
+ let title,body;
+ if(requested==='cancel'){
+ title='Cancel future renewal';
+ body='For an active paid subscription, stop future recurring charges only after the payment provider confirms cancellation. Keep paid access until the existing paid-through date, then apply the existing grace/access rules. Trial accounts have no paid renewal to cancel.';
+ }else if(requested===current){
+ title='No package change';
+ body='The customer already has this package. Do not create a second payment or reset the billing period.';
+ }else if(levels[requested]>levels[current]){
+ title='Upgrade request';
+ body=`New package: ${requested} (R${price[requested]}/month). Obtain a valid payment or confirmed billing adjustment first. After server-side verification, apply the higher entitlement and record an audit event. No immediate activation in this preview.`;
+ }else{
+ title='Downgrade request';
+ body=`New package: ${requested} (R${price[requested]}/month). Schedule the change at the end of the already-paid billing period. Do not remove paid features early. Verify any renewal adjustment with the payment provider.`;
+ }
+ $('lifePreview').innerHTML=`<strong>${esc(title)}</strong><p>${esc(body)}</p><p class="muted">Simulation only · no database changes</p>`;
+}
+async function loadSubscriptions(){
+ if(!active)return;
+ const el=$('subscriptionRequests');el.textContent='Loading requests…';
+ const {data,error}=await sb.rpc('qf_admin_subscription_overview');
+ if(error){el.textContent='Could not load subscription requests: '+error.message;return}
+ const rows=data||[];
+ el.innerHTML=rows.length?rows.map(r=>`<div class="ticket">
+ <div class="row"><strong>${esc(r.business_name)}</strong><span class="pill">${esc(r.request_status)}</span></div>
+ <p>Requested: <strong>${esc(r.requested_plan)}</strong> · Current plan: <strong>${esc(r.current_plan||'unconfigured')}</strong></p>
+ <p class="muted">Submitted ${esc(new Date(r.requested_at).toLocaleString('en-ZA'))}</p>
+ <p class="muted">Renewal due: ${esc(r.renewal_due_at?new Date(r.renewal_due_at).toLocaleDateString('en-ZA'):'Not set')} · Paid-through: ${esc(r.paid_through?new Date(r.paid_through).toLocaleDateString('en-ZA'):'Not set')}</p>
+ <p class="muted">Database billing records marked paid: ${esc(r.verified_paid_records)}. This count does not independently verify a payment provider transaction.</p>
+ <small class="muted">Request ID: ${esc(r.request_id)} · Review only — no activation, charge or cancellation performed</small>
+ </div>`).join(''):'No subscription requests yet.';
+}
+async function loadTickets(){
+ if(!active)return;
+ const el=$('tickets');el.textContent='Loading tickets…';
+ const {data,error}=await sb.rpc('qf_admin_ticket_list');
+ if(error){el.textContent=error.message;return}
+ el.innerHTML=data?.length?data.map(t=>`<div class="ticket"><div class="row"><strong>${esc(ref(t.ticket_number))}</strong><span class="pill">${esc(t.status)}</span></div>
+ <p><strong>${esc(t.business_name)}</strong> · ${esc(t.subject)}</p><pre>${esc(t.description)}</pre>
+ <small class="muted">${esc(new Date(t.created_at).toLocaleString('en-ZA'))}</small>
+ <div><button class="btn secondary" onclick="openTicket('${t.id}')">View and respond</button><button class="btn secondary" onclick="loadDiagnostics('${t.id}')">Account diagnostics</button></div><div id="diagnostics-${t.id}" class="hide"></div><div id="detail-${t.id}" class="hide"></div></div>`).join(''):'No tickets yet.';
+}
+
+async function loadDiagnostics(id){
+ const el=$('diagnostics-'+id);el.classList.remove('hide');el.textContent='Checking account…';
+ const {data,error}=await sb.rpc('qf_admin_ticket_diagnostics',{p_ticket_id:id});
+ if(error){el.textContent='Diagnostics unavailable: '+error.message;return}
+ const when=x=>x?new Date(x).toLocaleString('en-ZA'):'Not set';
+ const fields=[
+ ['Business',data.business_name],['Subscription plan',data.plan],
+ ['Trial expiry',when(data.trial_expires_at)],['Renewal due',when(data.renewal_due_at)],
+ ['Temporary developer test access until',when(data.developer_test_until)],
+ ['Saved documents (including deleted)',data.document_count],['Letterheads (including deleted)',data.letterhead_count],
+ ['Cloud drafts',data.draft_count],['Items in Trash',data.trash_count],
+ ['Latest document created',when(data.latest_document_at)]
+ ];
+ el.innerHTML='<div class="card" style="background:#f7f9fc"><strong>Read-only account diagnostics</strong><p class="muted">Counts and dates are for investigation only. No document contents or passwords are displayed. This does not prove why a save failed.</p>'+
+ fields.map(([label,value])=>`<div class="row" style="border-bottom:1px solid #dce4ee;padding:7px 0"><span>${esc(label)}</span><strong>${esc(value)}</strong></div>`).join('')+
+ '<p class="muted">If the customer reports an error, ask for the approximate time and the action they attempted. Detailed error logs are a future feature.</p></div>';
+}
+async function openTicket(id){
+ const el=$('detail-'+id);el.classList.remove('hide');el.textContent='Loading conversation…';
+ const {data,error}=await sb.from('support_ticket_messages').select('author_type,message,created_at').eq('ticket_id',id).order('created_at',{ascending:true});
+ if(error){el.textContent=error.message;return}
+ el.innerHTML=(data||[]).map(m=>`<div class="message"><strong>${esc(m.author_type)}</strong> · <small>${esc(new Date(m.created_at).toLocaleString('en-ZA'))}</small><pre>${esc(m.message)}</pre></div>`).join('')+
+ `<label>Reply to customer (in-app only)</label><textarea id="reply-${id}" maxlength="5000" placeholder="Write your reply"></textarea>
+ <button class="btn" onclick="sendReply('${id}')">Send reply</button>
+ <label>Ticket status</label><select id="status-${id}"><option value="open">Open</option><option value="in_progress">In progress</option><option value="waiting_for_customer">Waiting for customer</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select><button class="btn secondary" onclick="updateStatus('${id}')">Update status</button><p id="msg-${id}" role="status"></p>`;
+}
+async function sendReply(id){
+ const message=$('reply-'+id).value.trim();if(!message)return;
+ const {data:{user}}=await sb.auth.getUser();
+ const {error}=await sb.from('support_ticket_messages').insert({ticket_id:id,author_id:user.id,author_type:'admin',message});
+ $('msg-'+id).textContent=error?'Could not send reply: '+error.message:'Reply saved. Customer can read it in Help & Support → View conversation. Automatic email is not active.';
+ if(!error)await openTicket(id);
+}
+async function updateStatus(id){
+ const status=$('status-'+id).value;
+ const {error}=await sb.from('support_tickets').update({status,updated_at:new Date().toISOString()}).eq('id',id);
+ $('msg-'+id).textContent=error?'Update failed: '+error.message:'Ticket status updated.';
+ if(!error)await loadTickets();
+}
+</script></body></html>
